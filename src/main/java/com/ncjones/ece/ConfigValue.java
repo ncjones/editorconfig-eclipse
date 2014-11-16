@@ -41,4 +41,8 @@ public class ConfigValue {
 		return "ConfigValue [type=" + type + ", value=" + value + "]";
 	}
 
+	public String getDisplayValue() {
+		return type.getDisplayValue(this);
+	}
+
 }

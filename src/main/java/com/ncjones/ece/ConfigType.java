@@ -19,27 +19,34 @@ package com.ncjones.ece;
 
 public enum ConfigType {
 
-	INDENT_STYLE("Indent Style", new EnumValueParser(IndentStyleOption.class)),
+	INDENT_STYLE("Indent Style", new EnumValueParser(IndentStyleOption.class), ValueRenderer.DISPLAYABLE_VALUE_RENDERER),
 
 	INDENT_SIZE("Indent Size", ValueParser.POSITIVE_INT_VALUE_PARSER),
 
 	TAB_WIDTH("Tab Width", ValueParser.POSITIVE_INT_VALUE_PARSER),
 
-	END_OF_LINE("End of Line", new EnumValueParser(EndOfLineOption.class)),
+	END_OF_LINE("End of Line", new EnumValueParser(EndOfLineOption.class), ValueRenderer.DISPLAYABLE_VALUE_RENDERER),
 
 	CHARSET("Charset", ValueParser.IDENTITY_VALUE_PARSER),
 
-	TRIM_TRAILING_WHITESPACE("Trim Trailing Whitespace", ValueParser.BOOLEAN_VALUE_PARSER),
+	TRIM_TRAILING_WHITESPACE("Trim Trailing Whitespace", ValueParser.BOOLEAN_VALUE_PARSER, ValueRenderer.BOOLEAN_VALUE_RENDERER),
 
-	INSERT_FINAL_NEWLINE("Insert Final Newline", ValueParser.BOOLEAN_VALUE_PARSER);
+	INSERT_FINAL_NEWLINE("Insert Final Newline", ValueParser.BOOLEAN_VALUE_PARSER, ValueRenderer.BOOLEAN_VALUE_RENDERER);
 
 	private final String label;
 
 	private final ValueParser valueParser;
 
+	private ValueRenderer valueRenderer;
+
 	private ConfigType(final String label, final ValueParser valueParser) {
+		this(label, valueParser, ValueRenderer.TO_STRING_VALUE_RENDERER);
+	}
+
+	private ConfigType(final String label, final ValueParser valueParser, final ValueRenderer valueRenderer) {
 		this.label = label;
 		this.valueParser = valueParser;
+		this.valueRenderer = valueRenderer;
 	}
 
 	public String getDisplayLabel() {
@@ -52,6 +59,10 @@ public enum ConfigType {
 			return null;
 		}
 		return new ConfigValue(this, parsedValue);
+	}
+
+	public String getDisplayValue(final ConfigValue configValue) {
+		return valueRenderer.renderValue(configValue.getValue());
 	}
 
 }

@@ -17,12 +17,23 @@
  */
 package com.ncjones.ece;
 
-public enum EndOfLineOption {
+public enum EndOfLineOption implements Displayable {
 
-	LF,
+	LF("Line Feed"),
 
-	CR,
+	CR("Carriage Return"),
 
-	CRLF
+	CRLF("Carriage Return + Line Feed");
+
+	private final String displayValue;
+
+	private EndOfLineOption(final String displayValue) {
+		this.displayValue = displayValue;
+	}
+
+	@Override
+	public String getDisplayValue() {
+		return displayValue;
+	}
 
 }

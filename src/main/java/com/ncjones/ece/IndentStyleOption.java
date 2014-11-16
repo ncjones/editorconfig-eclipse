@@ -17,10 +17,21 @@
  */
 package com.ncjones.ece;
 
-public enum IndentStyleOption{
+public enum IndentStyleOption implements Displayable {
 
-	TAB,
+	TAB("Tab"),
 
-	SPACE
+	SPACE("Space");
+
+	private final String displayValue;
+
+	private IndentStyleOption(final String displayValue) {
+		this.displayValue = displayValue;
+	}
+
+	@Override
+	public String getDisplayValue() {
+		return displayValue;
+	}
 
 }

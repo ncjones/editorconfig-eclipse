@@ -41,4 +41,9 @@ public class EditorFileConfig {
 		return configProperties;
 	}
 
+	@Override
+	public String toString() {
+		return "EditorFileConfig [path=" + path + ", configProperties=" + configProperties + "]";
+	}
+
 }

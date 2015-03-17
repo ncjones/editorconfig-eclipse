@@ -15,34 +15,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ncjones.ece;
+package com.ncjones.editorconfig.core;
 
-public class ConfigValue {
+public enum IndentStyleOption implements Displayable {
 
-	private final ConfigType type;
+	TAB("Tab"),
 
-	private final Object value;
+	SPACE("Space");
 
-	public ConfigValue(final ConfigType type, final Object value) {
-		this.type = type;
-		this.value = value;
-	}
+	private final String displayValue;
 
-	public ConfigType getType() {
-		return type;
-	}
-
-	public Object getValue() {
-		return value;
+	private IndentStyleOption(final String displayValue) {
+		this.displayValue = displayValue;
 	}
 
 	@Override
-	public String toString() {
-		return "ConfigValue [type=" + type + ", value=" + value + "]";
-	}
-
 	public String getDisplayValue() {
-		return type.getDisplayValue(this);
+		return displayValue;
 	}
 
 }

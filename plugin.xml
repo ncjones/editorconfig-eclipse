@@ -3,8 +3,8 @@
 <plugin>
 	<extension point="org.eclipse.ui.propertyPages">
 		<page
-				class="com.ncjones.ece.properties.EditorConfigPropertyPage"
-				id="com.ncjones.ece.properties.editorConfigPropertyPage"
+				class="com.ncjones.editorconfig.eclipse.EditorConfigPropertyPage"
+				id="com.ncjones.editorconfig.eclipse.editorConfigPropertyPage"
 				name="Editor Config"
 				nameFilter="*.*">
 			<enabledWhen>

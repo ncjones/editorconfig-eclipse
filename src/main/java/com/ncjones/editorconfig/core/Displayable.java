@@ -1,4 +1,4 @@
-package com.ncjones.ece;
+package com.ncjones.editorconfig.core;
 
 interface Displayable {
 

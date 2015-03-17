@@ -1,4 +1,4 @@
-package com.ncjones.ece;
+package com.ncjones.editorconfig.core;
 
 interface ValueRenderer {
 	final ValueRenderer TO_STRING_VALUE_RENDERER = new ValueRenderer() {

@@ -15,15 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ncjones.ece;
+package com.ncjones.editorconfig.core;
 
-import static com.ncjones.ece.ConfigType.CHARSET;
-import static com.ncjones.ece.ConfigType.END_OF_LINE;
-import static com.ncjones.ece.ConfigType.INDENT_SIZE;
-import static com.ncjones.ece.ConfigType.INDENT_STYLE;
-import static com.ncjones.ece.ConfigType.INSERT_FINAL_NEWLINE;
-import static com.ncjones.ece.ConfigType.TAB_WIDTH;
-import static com.ncjones.ece.ConfigType.TRIM_TRAILING_WHITESPACE;
+import static com.ncjones.editorconfig.core.ConfigType.CHARSET;
+import static com.ncjones.editorconfig.core.ConfigType.END_OF_LINE;
+import static com.ncjones.editorconfig.core.ConfigType.INDENT_SIZE;
+import static com.ncjones.editorconfig.core.ConfigType.INDENT_STYLE;
+import static com.ncjones.editorconfig.core.ConfigType.INSERT_FINAL_NEWLINE;
+import static com.ncjones.editorconfig.core.ConfigType.TAB_WIDTH;
+import static com.ncjones.editorconfig.core.ConfigType.TRIM_TRAILING_WHITESPACE;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -34,6 +34,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+
+import com.ncjones.editorconfig.core.ConfigType;
 
 @RunWith(Parameterized.class)
 public class ConfigTypeTest {

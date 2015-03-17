@@ -15,17 +15,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ncjones.ece;
+package com.ncjones.editorconfig.core;
 
-public enum IndentStyleOption implements Displayable {
+public enum EndOfLineOption implements Displayable {
 
-	TAB("Tab"),
+	LF("Line Feed"),
 
-	SPACE("Space");
+	CR("Carriage Return"),
+
+	CRLF("Carriage Return + Line Feed");
 
 	private final String displayValue;
 
-	private IndentStyleOption(final String displayValue) {
+	private EndOfLineOption(final String displayValue) {
 		this.displayValue = displayValue;
 	}
 

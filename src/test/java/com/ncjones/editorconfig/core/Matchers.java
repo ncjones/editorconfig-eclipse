@@ -15,25 +15,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ncjones.ece;
+package com.ncjones.editorconfig.core;
 
-public enum EndOfLineOption implements Displayable {
+import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.is;
 
-	LF("Line Feed"),
+import com.ncjones.editorconfig.core.ConfigType;
 
-	CR("Carriage Return"),
+public class Matchers {
 
-	CRLF("Carriage Return + Line Feed");
-
-	private final String displayValue;
-
-	private EndOfLineOption(final String displayValue) {
-		this.displayValue = displayValue;
+	public static ConfigValueMatcher configValue(final ConfigType type, final Object value) {
+		return new ConfigValueMatcher(is(type), is(value));
 	}
 
-	@Override
-	public String getDisplayValue() {
-		return displayValue;
+	public static ConfigValueMatcher configValueWithType(final ConfigType type) {
+		return new ConfigValueMatcher(is(type), anything());
 	}
-
+	
 }

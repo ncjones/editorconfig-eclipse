@@ -15,21 +15,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ncjones.ece;
+package com.ncjones.editorconfig.core;
 
-import static com.ncjones.ece.ConfigType.CHARSET;
-import static com.ncjones.ece.ConfigType.END_OF_LINE;
-import static com.ncjones.ece.ConfigType.INDENT_SIZE;
-import static com.ncjones.ece.ConfigType.INDENT_STYLE;
-import static com.ncjones.ece.ConfigType.INSERT_FINAL_NEWLINE;
-import static com.ncjones.ece.ConfigType.TAB_WIDTH;
-import static com.ncjones.ece.ConfigType.TRIM_TRAILING_WHITESPACE;
-import static com.ncjones.ece.EndOfLineOption.CR;
-import static com.ncjones.ece.EndOfLineOption.CRLF;
-import static com.ncjones.ece.EndOfLineOption.LF;
-import static com.ncjones.ece.IndentStyleOption.SPACE;
-import static com.ncjones.ece.IndentStyleOption.TAB;
-import static com.ncjones.ece.Matchers.configValue;
+import static com.ncjones.editorconfig.core.ConfigType.CHARSET;
+import static com.ncjones.editorconfig.core.ConfigType.END_OF_LINE;
+import static com.ncjones.editorconfig.core.ConfigType.INDENT_SIZE;
+import static com.ncjones.editorconfig.core.ConfigType.INDENT_STYLE;
+import static com.ncjones.editorconfig.core.ConfigType.INSERT_FINAL_NEWLINE;
+import static com.ncjones.editorconfig.core.ConfigType.TAB_WIDTH;
+import static com.ncjones.editorconfig.core.ConfigType.TRIM_TRAILING_WHITESPACE;
+import static com.ncjones.editorconfig.core.EndOfLineOption.CR;
+import static com.ncjones.editorconfig.core.EndOfLineOption.CRLF;
+import static com.ncjones.editorconfig.core.EndOfLineOption.LF;
+import static com.ncjones.editorconfig.core.IndentStyleOption.SPACE;
+import static com.ncjones.editorconfig.core.IndentStyleOption.TAB;
+import static com.ncjones.editorconfig.core.Matchers.configValue;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
@@ -45,6 +45,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.mockito.Mockito;
+
+import com.ncjones.editorconfig.core.ConfigType;
+import com.ncjones.editorconfig.core.EditorConfigService;
+import com.ncjones.editorconfig.core.FileConfig;
 
 @RunWith(Parameterized.class)
 public class EditorConfigServiceParamaterizedTest {

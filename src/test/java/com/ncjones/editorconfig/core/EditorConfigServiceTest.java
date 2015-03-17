@@ -15,18 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ncjones.ece;
+package com.ncjones.editorconfig.core;
 
-import static com.ncjones.ece.ConfigType.CHARSET;
-import static com.ncjones.ece.ConfigType.END_OF_LINE;
-import static com.ncjones.ece.ConfigType.INDENT_SIZE;
-import static com.ncjones.ece.ConfigType.INDENT_STYLE;
-import static com.ncjones.ece.ConfigType.INSERT_FINAL_NEWLINE;
-import static com.ncjones.ece.ConfigType.TAB_WIDTH;
-import static com.ncjones.ece.ConfigType.TRIM_TRAILING_WHITESPACE;
-import static com.ncjones.ece.EndOfLineOption.CRLF;
-import static com.ncjones.ece.Matchers.configValue;
-import static com.ncjones.ece.Matchers.configValueWithType;
+import static com.ncjones.editorconfig.core.ConfigType.CHARSET;
+import static com.ncjones.editorconfig.core.ConfigType.END_OF_LINE;
+import static com.ncjones.editorconfig.core.ConfigType.INDENT_SIZE;
+import static com.ncjones.editorconfig.core.ConfigType.INDENT_STYLE;
+import static com.ncjones.editorconfig.core.ConfigType.INSERT_FINAL_NEWLINE;
+import static com.ncjones.editorconfig.core.ConfigType.TAB_WIDTH;
+import static com.ncjones.editorconfig.core.ConfigType.TRIM_TRAILING_WHITESPACE;
+import static com.ncjones.editorconfig.core.EndOfLineOption.CRLF;
+import static com.ncjones.editorconfig.core.Matchers.configValue;
+import static com.ncjones.editorconfig.core.Matchers.configValueWithType;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
@@ -44,6 +44,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import com.ncjones.editorconfig.core.EditorConfigService;
+import com.ncjones.editorconfig.core.FileConfig;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EditorConfigServiceTest {

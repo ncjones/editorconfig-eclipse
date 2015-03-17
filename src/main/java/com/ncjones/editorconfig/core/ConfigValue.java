@@ -15,30 +15,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ncjones.ece;
+package com.ncjones.editorconfig.core;
 
-import java.util.Set;
+public class ConfigValue {
 
-/**
- * Editor config for a file.
- */
-public class FileConfig {
+	private final ConfigType type;
 
-	private final String path;
-	
-	private final Set<ConfigValue> configValues;
+	private final Object value;
 
-	public FileConfig(final String path, final Set<ConfigValue> configValues) {
-		this.path = path;
-		this.configValues = configValues;
+	public ConfigValue(final ConfigType type, final Object value) {
+		this.type = type;
+		this.value = value;
 	}
 
-	public String getPath() {
-		return path;
+	public ConfigType getType() {
+		return type;
 	}
 
-	public Set<ConfigValue> getConfigValues() {
-		return configValues;
+	public Object getValue() {
+		return value;
+	}
+
+	@Override
+	public String toString() {
+		return "ConfigValue [type=" + type + ", value=" + value + "]";
+	}
+
+	public String getDisplayValue() {
+		return type.getDisplayValue(this);
 	}
 
 }

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ncjones.ece.properties;
+package com.ncjones.editorconfig.eclipse;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.swt.SWT;
@@ -28,9 +28,9 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.PropertyPage;
 import org.editorconfig.core.EditorConfig;
 
-import com.ncjones.ece.ConfigValue;
-import com.ncjones.ece.EditorConfigService;
-import com.ncjones.ece.FileConfig;
+import com.ncjones.editorconfig.core.ConfigValue;
+import com.ncjones.editorconfig.core.EditorConfigService;
+import com.ncjones.editorconfig.core.FileConfig;
 
 public class EditorConfigPropertyPage extends PropertyPage {
 

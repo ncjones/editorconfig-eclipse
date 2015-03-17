@@ -15,19 +15,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ncjones.ece;
+package com.ncjones.editorconfig.core;
 
-import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.Matchers.is;
+import java.util.Set;
 
-public class Matchers {
+/**
+ * Editor config for a file.
+ */
+public class FileConfig {
 
-	public static ConfigValueMatcher configValue(final ConfigType type, final Object value) {
-		return new ConfigValueMatcher(is(type), is(value));
-	}
-
-	public static ConfigValueMatcher configValueWithType(final ConfigType type) {
-		return new ConfigValueMatcher(is(type), anything());
-	}
+	private final String path;
 	
+	private final Set<ConfigValue> configValues;
+
+	public FileConfig(final String path, final Set<ConfigValue> configValues) {
+		this.path = path;
+		this.configValues = configValues;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public Set<ConfigValue> getConfigValues() {
+		return configValues;
+	}
+
 }

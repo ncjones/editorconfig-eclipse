@@ -15,11 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ncjones.ece;
+package com.ncjones.editorconfig.core;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+
+import com.ncjones.editorconfig.core.ConfigType;
+import com.ncjones.editorconfig.core.ConfigValue;
 
 public class ConfigValueMatcher extends TypeSafeMatcher<ConfigValue> {
 	private final Matcher<ConfigType> typeMatcher;

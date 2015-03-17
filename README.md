@@ -15,6 +15,18 @@ To build, run:
 mvn install
 ```
 
+Note that the build depends on the editorconfig core source via a Git
+submodule. To initialize the submodule, run:
+
+```sh
+git submodule init && \
+git submodule update
+```
+
+
+Installing
+----------
+
 To install the built plugin into Eclipse, copy it to your Eclipse dropins dir
 and restart Eclipse:
 

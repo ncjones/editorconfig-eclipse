@@ -17,13 +17,13 @@
  */
 package com.ncjones.editorconfig.core;
 
-import static com.ncjones.editorconfig.core.ConfigType.CHARSET;
-import static com.ncjones.editorconfig.core.ConfigType.END_OF_LINE;
-import static com.ncjones.editorconfig.core.ConfigType.INDENT_SIZE;
-import static com.ncjones.editorconfig.core.ConfigType.INDENT_STYLE;
-import static com.ncjones.editorconfig.core.ConfigType.INSERT_FINAL_NEWLINE;
-import static com.ncjones.editorconfig.core.ConfigType.TAB_WIDTH;
-import static com.ncjones.editorconfig.core.ConfigType.TRIM_TRAILING_WHITESPACE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.CHARSET;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.END_OF_LINE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.INDENT_SIZE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.INDENT_STYLE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.INSERT_FINAL_NEWLINE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.TAB_WIDTH;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.TRIM_TRAILING_WHITESPACE;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -35,10 +35,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.ncjones.editorconfig.core.ConfigType;
+import com.ncjones.editorconfig.core.ConfigPropertyType;
 
 @RunWith(Parameterized.class)
-public class ConfigTypeTest {
+public class ConfigPropertyTypeTest {
 
 	@Parameters
 	public static Collection<Object[]> parameters() {
@@ -53,11 +53,11 @@ public class ConfigTypeTest {
 			);
 	}
 	
-	private final ConfigType configType;
+	private final ConfigPropertyType configType;
 	
 	private final String label;
 
-	public ConfigTypeTest(final ConfigType configType, final String label) {
+	public ConfigPropertyTypeTest(final ConfigPropertyType configType, final String label) {
 		this.configType = configType;
 		this.label = label;
 	}

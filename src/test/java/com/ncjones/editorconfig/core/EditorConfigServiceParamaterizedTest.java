@@ -17,19 +17,19 @@
  */
 package com.ncjones.editorconfig.core;
 
-import static com.ncjones.editorconfig.core.ConfigType.CHARSET;
-import static com.ncjones.editorconfig.core.ConfigType.END_OF_LINE;
-import static com.ncjones.editorconfig.core.ConfigType.INDENT_SIZE;
-import static com.ncjones.editorconfig.core.ConfigType.INDENT_STYLE;
-import static com.ncjones.editorconfig.core.ConfigType.INSERT_FINAL_NEWLINE;
-import static com.ncjones.editorconfig.core.ConfigType.TAB_WIDTH;
-import static com.ncjones.editorconfig.core.ConfigType.TRIM_TRAILING_WHITESPACE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.CHARSET;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.END_OF_LINE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.INDENT_SIZE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.INDENT_STYLE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.INSERT_FINAL_NEWLINE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.TAB_WIDTH;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.TRIM_TRAILING_WHITESPACE;
 import static com.ncjones.editorconfig.core.EndOfLineOption.CR;
 import static com.ncjones.editorconfig.core.EndOfLineOption.CRLF;
 import static com.ncjones.editorconfig.core.EndOfLineOption.LF;
 import static com.ncjones.editorconfig.core.IndentStyleOption.SPACE;
 import static com.ncjones.editorconfig.core.IndentStyleOption.TAB;
-import static com.ncjones.editorconfig.core.Matchers.configValue;
+import static com.ncjones.editorconfig.core.Matchers.configProperty;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
@@ -38,17 +38,12 @@ import static org.mockito.Mockito.when;
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.editorconfig.core.EditorConfig;
 import org.editorconfig.core.EditorConfig.OutPair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.mockito.Mockito;
-
-import com.ncjones.editorconfig.core.ConfigType;
-import com.ncjones.editorconfig.core.EditorConfigService;
-import com.ncjones.editorconfig.core.FileConfig;
 
 @RunWith(Parameterized.class)
 public class EditorConfigServiceParamaterizedTest {
@@ -82,11 +77,11 @@ public class EditorConfigServiceParamaterizedTest {
 
 	private final String rawValue;
 
-	private final ConfigType type;
+	private final ConfigPropertyType type;
 
 	private final Object parsedValue;
 
-	public EditorConfigServiceParamaterizedTest(final String key, final String rawValue, final ConfigType type, final Object parsedValue) {
+	public EditorConfigServiceParamaterizedTest(final String key, final String rawValue, final ConfigPropertyType type, final Object parsedValue) {
 		this.key = key;
 		this.rawValue = rawValue;
 		this.type = type;
@@ -95,11 +90,11 @@ public class EditorConfigServiceParamaterizedTest {
 
 	@Test
 	public void test() throws Exception {
-		final EditorConfig mockEditorConfig = Mockito.mock(EditorConfig.class);
-		final EditorConfigService editorConfigService = new EditorConfigService(mockEditorConfig);
-		when(mockEditorConfig.getProperties("test/path")).thenReturn(asList(new OutPair(key, rawValue)));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("test/path");
-		assertThat(fileConfig.getConfigValues(), contains(configValue(type, parsedValue)));
+		final org.editorconfig.core.EditorConfig editorConfigRules = Mockito.mock(org.editorconfig.core.EditorConfig.class);
+		final EditorConfigService editorConfigService = new EditorConfigService(editorConfigRules);
+		when(editorConfigRules.getProperties("test/path")).thenReturn(asList(new OutPair(key, rawValue)));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("test/path");
+		assertThat(fileConfig.getConfigProperties(), contains(configProperty(type, parsedValue)));
 	}
 
 

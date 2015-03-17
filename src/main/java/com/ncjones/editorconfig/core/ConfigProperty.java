@@ -17,28 +17,32 @@
  */
 package com.ncjones.editorconfig.core;
 
-import java.util.Set;
+public class ConfigProperty {
 
-/**
- * Editor config for a file.
- */
-public class FileConfig {
+	private final ConfigPropertyType type;
 
-	private final String path;
-	
-	private final Set<ConfigValue> configValues;
+	private final Object value;
 
-	public FileConfig(final String path, final Set<ConfigValue> configValues) {
-		this.path = path;
-		this.configValues = configValues;
+	public ConfigProperty(final ConfigPropertyType type, final Object value) {
+		this.type = type;
+		this.value = value;
 	}
 
-	public String getPath() {
-		return path;
+	public ConfigPropertyType getType() {
+		return type;
 	}
 
-	public Set<ConfigValue> getConfigValues() {
-		return configValues;
+	public Object getValue() {
+		return value;
+	}
+
+	@Override
+	public String toString() {
+		return "ConfigProperty [type=" + type + ", value=" + value + "]";
+	}
+
+	public String getDisplayValue() {
+		return type.getDisplayValue(this);
 	}
 
 }

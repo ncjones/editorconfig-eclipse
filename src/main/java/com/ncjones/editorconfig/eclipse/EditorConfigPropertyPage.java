@@ -28,9 +28,9 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.PropertyPage;
 import org.editorconfig.core.EditorConfig;
 
-import com.ncjones.editorconfig.core.ConfigValue;
+import com.ncjones.editorconfig.core.ConfigProperty;
 import com.ncjones.editorconfig.core.EditorConfigService;
-import com.ncjones.editorconfig.core.FileConfig;
+import com.ncjones.editorconfig.core.EditorFileConfig;
 
 public class EditorConfigPropertyPage extends PropertyPage {
 
@@ -50,19 +50,19 @@ public class EditorConfigPropertyPage extends PropertyPage {
 		return composite;
 	}
 
-	private FileConfig getFileEditorConfig() {
+	private EditorFileConfig getFileEditorConfig() {
 		final String path = getResource().getWorkspace().getRoot().getFile(getResource().getFullPath()).getLocation().toOSString();
-		return editorConfigService.getFileConfig(path);
+		return editorConfigService.getEditorConfig(path);
 	}
 
 	private IResource getResource() {
 		return (IResource) getElement();
 	}
 
-	private void createConfigProperties(final Composite parent, final FileConfig fileEditorConfig) {
+	private void createConfigProperties(final Composite parent, final EditorFileConfig fileEditorConfig) {
 		final Composite composite = createPropertiesComposite(parent);
-		for (final ConfigValue configValue : fileEditorConfig.getConfigValues()) {
-			addProperty(composite, configValue.getType().getDisplayLabel() + ":", configValue.getDisplayValue());
+		for (final ConfigProperty configProperty : fileEditorConfig.getConfigProperties()) {
+			addProperty(composite, configProperty.getType().getDisplayLabel() + ":", configProperty.getDisplayValue());
 		}
 	}
 

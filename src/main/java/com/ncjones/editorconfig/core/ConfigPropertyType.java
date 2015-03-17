@@ -17,7 +17,7 @@
  */
 package com.ncjones.editorconfig.core;
 
-public enum ConfigType {
+public enum ConfigPropertyType {
 
 	INDENT_STYLE("Indent Style", new EnumValueParser(IndentStyleOption.class), ValueRenderer.DISPLAYABLE_VALUE_RENDERER),
 
@@ -39,11 +39,11 @@ public enum ConfigType {
 
 	private ValueRenderer valueRenderer;
 
-	private ConfigType(final String label, final ValueParser valueParser) {
+	private ConfigPropertyType(final String label, final ValueParser valueParser) {
 		this(label, valueParser, ValueRenderer.TO_STRING_VALUE_RENDERER);
 	}
 
-	private ConfigType(final String label, final ValueParser valueParser, final ValueRenderer valueRenderer) {
+	private ConfigPropertyType(final String label, final ValueParser valueParser, final ValueRenderer valueRenderer) {
 		this.label = label;
 		this.valueParser = valueParser;
 		this.valueRenderer = valueRenderer;
@@ -53,16 +53,16 @@ public enum ConfigType {
 		return label;
 	}
 
-	public ConfigValue createConfigValue(final String value) {
+	public ConfigProperty createConfigProperty(final String value) {
 		final Object parsedValue = valueParser.parse(value);
 		if (parsedValue == null) {
 			return null;
 		}
-		return new ConfigValue(this, parsedValue);
+		return new ConfigProperty(this, parsedValue);
 	}
 
-	public String getDisplayValue(final ConfigValue configValue) {
-		return valueRenderer.renderValue(configValue.getValue());
+	public String getDisplayValue(final ConfigProperty configProperty) {
+		return valueRenderer.renderValue(configProperty.getValue());
 	}
 
 }

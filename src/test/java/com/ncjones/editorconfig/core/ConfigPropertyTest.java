@@ -1,12 +1,12 @@
 package com.ncjones.editorconfig.core;
 
-import static com.ncjones.editorconfig.core.ConfigType.CHARSET;
-import static com.ncjones.editorconfig.core.ConfigType.END_OF_LINE;
-import static com.ncjones.editorconfig.core.ConfigType.INDENT_SIZE;
-import static com.ncjones.editorconfig.core.ConfigType.INDENT_STYLE;
-import static com.ncjones.editorconfig.core.ConfigType.INSERT_FINAL_NEWLINE;
-import static com.ncjones.editorconfig.core.ConfigType.TAB_WIDTH;
-import static com.ncjones.editorconfig.core.ConfigType.TRIM_TRAILING_WHITESPACE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.CHARSET;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.END_OF_LINE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.INDENT_SIZE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.INDENT_STYLE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.INSERT_FINAL_NEWLINE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.TAB_WIDTH;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.TRIM_TRAILING_WHITESPACE;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -18,13 +18,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.ncjones.editorconfig.core.ConfigType;
-import com.ncjones.editorconfig.core.ConfigValue;
-import com.ncjones.editorconfig.core.EndOfLineOption;
-import com.ncjones.editorconfig.core.IndentStyleOption;
-
 @RunWith(Parameterized.class)
-public class ConfigValueTest {
+public class ConfigPropertyTest {
 
 	@Parameters
 	public static Collection<Object[]> parameters() {
@@ -44,20 +39,20 @@ public class ConfigValueTest {
 			);
 	}
 
-	private final ConfigType type;
+	private final ConfigPropertyType type;
 
 	private final Object value;
 
 	private final String displayValue;
 
-	public ConfigValueTest(final ConfigType type, final Object value, final String displayValue) {
+	public ConfigPropertyTest(final ConfigPropertyType type, final Object value, final String displayValue) {
 		this.type = type;
 		this.value = value;
 		this.displayValue = displayValue;
 	}
 
 	@Test
-	public void configValueShouldHaveExpectedDisplayValue() {
-		assertThat(new ConfigValue(type, value).getDisplayValue(), is(displayValue));
+	public void configPropertyShouldHaveExpectedDisplayValue() {
+		assertThat(new ConfigProperty(type, value).getDisplayValue(), is(displayValue));
 	}
 }

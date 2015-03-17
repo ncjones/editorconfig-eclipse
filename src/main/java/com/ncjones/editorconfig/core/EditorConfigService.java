@@ -23,50 +23,49 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.editorconfig.core.EditorConfig;
 import org.editorconfig.core.EditorConfig.OutPair;
 import org.editorconfig.core.EditorConfigException;
 
 public class EditorConfigService {
 
-	private static final Comparator<ConfigValue> CONFIG_VALUE_TYPE_COMPARATOR = new Comparator<ConfigValue>() {
+	private static final Comparator<ConfigProperty> CONFIG_PROPERTY_TYPE_COMPARATOR = new Comparator<ConfigProperty>() {
 		@Override
-		public int compare(final ConfigValue o1, final ConfigValue o2) {
+		public int compare(final ConfigProperty o1, final ConfigProperty o2) {
 			return o1.getType().compareTo(o2.getType());
 		}
 	};
 
-	private final EditorConfig editorConfig;
+	private final org.editorconfig.core.EditorConfig editorConfig;
 
-	public EditorConfigService(final EditorConfig editorConfig) {
+	public EditorConfigService(final org.editorconfig.core.EditorConfig editorConfig) {
 		this.editorConfig = editorConfig;
 	}
 
-	public FileConfig getFileConfig(final String path) {
+	public EditorFileConfig getEditorConfig(final String path) {
 		final List<OutPair> properties;
 		try {
 			properties = editorConfig.getProperties(path);
 		} catch (final EditorConfigException e) {
 			throw new RuntimeException(e);
 		}
-		final SortedSet<ConfigValue> configValues = new TreeSet<ConfigValue>(CONFIG_VALUE_TYPE_COMPARATOR);
+		final SortedSet<ConfigProperty> configProperties = new TreeSet<ConfigProperty>(CONFIG_PROPERTY_TYPE_COMPARATOR);
 		for (final OutPair outPair : properties) {
-			final ConfigValue configValue = createConfigValue(outPair);
-			if (configValue != null) {
-				configValues.add(configValue);
+			final ConfigProperty configProperty = createConfigProperty(outPair);
+			if (configProperty != null) {
+				configProperties.add(configProperty);
 			}
 		}
-		return new FileConfig(path, Collections.unmodifiableSet(configValues));
+		return new EditorFileConfig(path, Collections.unmodifiableSet(configProperties));
 	}
 
-	private static ConfigValue createConfigValue(final OutPair outPair) {
-		final ConfigType configType;
+	private static ConfigProperty createConfigProperty(final OutPair outPair) {
+		final ConfigPropertyType configType;
 		try {
-			configType = ConfigType.valueOf(outPair.getKey().toUpperCase());
+			configType = ConfigPropertyType.valueOf(outPair.getKey().toUpperCase());
 		} catch (final IllegalArgumentException e) {
 			return null;
 		}
-		return configType.createConfigValue(outPair.getVal());
+		return configType.createConfigProperty(outPair.getVal());
 	}
 
 }

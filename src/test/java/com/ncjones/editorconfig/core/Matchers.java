@@ -20,16 +20,16 @@ package com.ncjones.editorconfig.core;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 
-import com.ncjones.editorconfig.core.ConfigType;
+import com.ncjones.editorconfig.core.ConfigPropertyType;
 
 public class Matchers {
 
-	public static ConfigValueMatcher configValue(final ConfigType type, final Object value) {
-		return new ConfigValueMatcher(is(type), is(value));
+	public static ConfigPropertyMatcher configProperty(final ConfigPropertyType type, final Object value) {
+		return new ConfigPropertyMatcher(is(type), is(value));
 	}
 
-	public static ConfigValueMatcher configValueWithType(final ConfigType type) {
-		return new ConfigValueMatcher(is(type), anything());
+	public static ConfigPropertyMatcher configPropertyWithType(final ConfigPropertyType type) {
+		return new ConfigPropertyMatcher(is(type), anything());
 	}
 	
 }

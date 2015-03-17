@@ -17,16 +17,16 @@
  */
 package com.ncjones.editorconfig.core;
 
-import static com.ncjones.editorconfig.core.ConfigType.CHARSET;
-import static com.ncjones.editorconfig.core.ConfigType.END_OF_LINE;
-import static com.ncjones.editorconfig.core.ConfigType.INDENT_SIZE;
-import static com.ncjones.editorconfig.core.ConfigType.INDENT_STYLE;
-import static com.ncjones.editorconfig.core.ConfigType.INSERT_FINAL_NEWLINE;
-import static com.ncjones.editorconfig.core.ConfigType.TAB_WIDTH;
-import static com.ncjones.editorconfig.core.ConfigType.TRIM_TRAILING_WHITESPACE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.CHARSET;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.END_OF_LINE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.INDENT_SIZE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.INDENT_STYLE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.INSERT_FINAL_NEWLINE;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.TAB_WIDTH;
+import static com.ncjones.editorconfig.core.ConfigPropertyType.TRIM_TRAILING_WHITESPACE;
 import static com.ncjones.editorconfig.core.EndOfLineOption.CRLF;
-import static com.ncjones.editorconfig.core.Matchers.configValue;
-import static com.ncjones.editorconfig.core.Matchers.configValueWithType;
+import static com.ncjones.editorconfig.core.Matchers.configProperty;
+import static com.ncjones.editorconfig.core.Matchers.configPropertyWithType;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
@@ -44,9 +44,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import com.ncjones.editorconfig.core.EditorConfigService;
-import com.ncjones.editorconfig.core.FileConfig;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EditorConfigServiceTest {
@@ -67,14 +64,14 @@ public class EditorConfigServiceTest {
 					new OutPair("tab_width", "8"),
 					new OutPair("charset", "utf8")
 				));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), contains(configValue(TAB_WIDTH, 8), configValue(CHARSET, "utf8")));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), contains(configProperty(TAB_WIDTH, 8), configProperty(CHARSET, "utf8")));
 	}
 
 	@Test
 	public void getFileConfigShouldReturnFileConfigWithGivenPath() throws Exception {
 		when(mockEditorConfig.getProperties("path")).thenReturn(Arrays.<OutPair> asList());
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
 		assertThat(fileConfig.getPath(), is("path"));
 	}
 
@@ -89,29 +86,29 @@ public class EditorConfigServiceTest {
 					new OutPair("tab_width", "4"),
 					new OutPair("trim_trailing_whitespace", "true")
 				));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), contains(
-					configValueWithType(INDENT_STYLE),
-					configValueWithType(INDENT_SIZE),
-					configValueWithType(TAB_WIDTH),
-					configValueWithType(END_OF_LINE),
-					configValueWithType(CHARSET),
-					configValueWithType(TRIM_TRAILING_WHITESPACE),
-					configValueWithType(INSERT_FINAL_NEWLINE)
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), contains(
+					configPropertyWithType(INDENT_STYLE),
+					configPropertyWithType(INDENT_SIZE),
+					configPropertyWithType(TAB_WIDTH),
+					configPropertyWithType(END_OF_LINE),
+					configPropertyWithType(CHARSET),
+					configPropertyWithType(TRIM_TRAILING_WHITESPACE),
+					configPropertyWithType(INSERT_FINAL_NEWLINE)
 				));
 	}
 
 	@Test
 	public void getFileConfigShouldReturnFileConfigWithEmptyValuesWhenEditorConfigHasNoProperties() throws Exception {
 		when(mockEditorConfig.getProperties("path")).thenReturn(Collections.<OutPair> emptyList());
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), is(empty()));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), is(empty()));
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void getFileConfigShouldThrowRuntimeExceptionWhenEditorConfigThrowsException() throws Exception {
 		when(mockEditorConfig.getProperties("path")).thenThrow(EditorConfigException.class);
-		editorConfigService.getFileConfig("path");
+		editorConfigService.getEditorConfig("path");
 	}
 	
 	@Test
@@ -120,8 +117,8 @@ public class EditorConfigServiceTest {
 					new OutPair("tab_width", "8"),
 					new OutPair("unkown_config", "val")
 				));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), contains(configValue(TAB_WIDTH, 8)));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), contains(configProperty(TAB_WIDTH, 8)));
 	}
 		
 	@Test
@@ -130,8 +127,8 @@ public class EditorConfigServiceTest {
 					new OutPair("tab_width", "8"),
 					new OutPair("indent_style", "unknown_val")
 				));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), contains(configValue(TAB_WIDTH, 8)));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), contains(configProperty(TAB_WIDTH, 8)));
 	}
 		
 	@Test
@@ -140,8 +137,8 @@ public class EditorConfigServiceTest {
 					new OutPair("tab_width", "8"),
 					new OutPair("end_of_line", "unknown_val")
 				));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), contains(configValue(TAB_WIDTH, 8)));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), contains(configProperty(TAB_WIDTH, 8)));
 	}
 
 	@Test
@@ -149,8 +146,8 @@ public class EditorConfigServiceTest {
 		when(mockEditorConfig.getProperties("path")).thenReturn(Arrays.asList(
 					new OutPair("insert_final_newline", "unknown_val")
 				));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), contains(configValue(INSERT_FINAL_NEWLINE, false)));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), contains(configProperty(INSERT_FINAL_NEWLINE, false)));
 	}
 		
 	@Test
@@ -158,8 +155,8 @@ public class EditorConfigServiceTest {
 		when(mockEditorConfig.getProperties("path")).thenReturn(Arrays.asList(
 					new OutPair("trim_trailing_whitespace", "unknown_val")
 				));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), contains(configValue(TRIM_TRAILING_WHITESPACE, false)));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), contains(configProperty(TRIM_TRAILING_WHITESPACE, false)));
 	}
 		
 	@Test
@@ -168,8 +165,8 @@ public class EditorConfigServiceTest {
 					new OutPair("indent_size", "yes"),
 					new OutPair("end_of_line", "crlf")
 				));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), contains(configValue(END_OF_LINE, CRLF)));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), contains(configProperty(END_OF_LINE, CRLF)));
 	}
 		
 	@Test
@@ -178,8 +175,8 @@ public class EditorConfigServiceTest {
 					new OutPair("indent_size", "0"),
 					new OutPair("end_of_line", "crlf")
 				));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), contains(configValue(END_OF_LINE, CRLF)));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), contains(configProperty(END_OF_LINE, CRLF)));
 	}
 
 	@Test
@@ -188,8 +185,8 @@ public class EditorConfigServiceTest {
 					new OutPair("indent_size", "-1"),
 					new OutPair("end_of_line", "crlf")
 				));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), contains(configValue(END_OF_LINE, CRLF)));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), contains(configProperty(END_OF_LINE, CRLF)));
 	}
 		
 	@Test
@@ -198,8 +195,8 @@ public class EditorConfigServiceTest {
 					new OutPair("tab_width", "yes"),
 					new OutPair("end_of_line", "crlf")
 				));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), contains(configValue(END_OF_LINE, CRLF)));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), contains(configProperty(END_OF_LINE, CRLF)));
 	}
 		
 	@Test
@@ -208,8 +205,8 @@ public class EditorConfigServiceTest {
 					new OutPair("tab_width", "0"),
 					new OutPair("end_of_line", "crlf")
 				));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), contains(configValue(END_OF_LINE, CRLF)));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), contains(configProperty(END_OF_LINE, CRLF)));
 	}
 
 	@Test
@@ -218,8 +215,8 @@ public class EditorConfigServiceTest {
 					new OutPair("tab_width", "-1"),
 					new OutPair("end_of_line", "crlf")
 				));
-		final FileConfig fileConfig = editorConfigService.getFileConfig("path");
-		assertThat(fileConfig.getConfigValues(), contains(configValue(END_OF_LINE, CRLF)));
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("path");
+		assertThat(fileConfig.getConfigProperties(), contains(configProperty(END_OF_LINE, CRLF)));
 	}
 
 }

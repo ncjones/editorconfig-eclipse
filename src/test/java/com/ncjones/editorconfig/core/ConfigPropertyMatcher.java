@@ -21,21 +21,18 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-import com.ncjones.editorconfig.core.ConfigType;
-import com.ncjones.editorconfig.core.ConfigValue;
-
-public class ConfigValueMatcher extends TypeSafeMatcher<ConfigValue> {
-	private final Matcher<ConfigType> typeMatcher;
+public class ConfigPropertyMatcher extends TypeSafeMatcher<ConfigProperty> {
+	private final Matcher<ConfigPropertyType> typeMatcher;
 	private final Matcher<Object> valueMatcher;
 
-	public ConfigValueMatcher(final Matcher<ConfigType> typeMatcher, final Matcher<Object> valueMatcher) {
+	public ConfigPropertyMatcher(final Matcher<ConfigPropertyType> typeMatcher, final Matcher<Object> valueMatcher) {
 		this.typeMatcher = typeMatcher;
 		this.valueMatcher = valueMatcher;
 	}
 
 	@Override
 	public void describeTo(final Description description) {
-		description.appendText("ConfigValue(");
+		description.appendText("ConfigProperty(");
 		typeMatcher.describeTo(description);
 		description.appendText(", ");
 		valueMatcher.describeTo(description);
@@ -43,13 +40,13 @@ public class ConfigValueMatcher extends TypeSafeMatcher<ConfigValue> {
 	}
 
 	@Override
-	protected void describeMismatchSafely(final ConfigValue item, final Description mismatchDescription) {
-		mismatchDescription.appendText("was ConfigValue(").appendValue(item.getType()).appendText(", ")
+	protected void describeMismatchSafely(final ConfigProperty item, final Description mismatchDescription) {
+		mismatchDescription.appendText("was ConfigProperty(").appendValue(item.getType()).appendText(", ")
 				.appendValue(item.getValue()).appendText(")");
 	}
 
 	@Override
-	protected boolean matchesSafely(final ConfigValue item) {
+	protected boolean matchesSafely(final ConfigProperty item) {
 		return typeMatcher.matches(item.getType()) && valueMatcher.matches(item.getValue());
 	}
 

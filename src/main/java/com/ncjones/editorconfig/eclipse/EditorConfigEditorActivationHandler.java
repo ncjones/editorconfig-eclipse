@@ -22,12 +22,13 @@ import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 
 import com.ncjones.editorconfig.core.ConfigProperty;
-import com.ncjones.editorconfig.core.ConfigPropertyType;
+import com.ncjones.editorconfig.core.ConfigPropertyVisitor;
 import com.ncjones.editorconfig.core.EditorConfigService;
 import com.ncjones.editorconfig.core.EditorFileConfig;
+import com.ncjones.editorconfig.core.EndOfLineOption;
 import com.ncjones.editorconfig.core.IndentStyleOption;
 
-public class EditorConfigEditorActivationHandler implements EditorActivationHandler {
+public class EditorConfigEditorActivationHandler implements EditorActivationHandler, ConfigPropertyVisitor {
 
 	private final EditorConfigService editorConfigService;
 
@@ -38,8 +39,10 @@ public class EditorConfigEditorActivationHandler implements EditorActivationHand
 	@Override
 	public void editorActivated(final IFile editorFile) {
 		final EditorFileConfig fileEditorConfig = getEditorFileConfig(editorFile);
-		System.out.println("Editor changed: " + fileEditorConfig);
-		setEclipseProperties(fileEditorConfig);
+		System.out.println("Editor activated: " + fileEditorConfig);
+		for (final ConfigProperty<?> configProperty : fileEditorConfig.getConfigProperties()) {
+			configProperty.accept(this);
+		}
 	}
 
 	private EditorFileConfig getEditorFileConfig(final IFile file) {
@@ -47,24 +50,50 @@ public class EditorConfigEditorActivationHandler implements EditorActivationHand
 		return editorConfigService.getEditorConfig(path);
 	}
 
-	private void setEclipseProperties(final EditorFileConfig config) {
-		for (final ConfigProperty configValue : config.getConfigProperties()) {
-			if (configValue.getType().equals(ConfigPropertyType.TAB_WIDTH)) {
-				setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.tabulation.size", configValue.getValue()
-						.toString());
-			} else if (configValue.getType().equals(ConfigPropertyType.INDENT_SIZE)) {
-				setPreference("org.eclipse.ui.editors", "tabWidth", configValue.getValue().toString());
-			} else if (configValue.getType().equals(ConfigPropertyType.INDENT_STYLE)) {
-				final Boolean spacesForTabs = configValue.getValue().equals(IndentStyleOption.SPACE);
-				setPreference("org.eclipse.ui.editors", "spacesForTabs", spacesForTabs.toString());
-			}
-		}
-	}
-
 	private void setPreference(final String prefsNodeName, final String key, final String value) {
 		System.out.println(String.format("Setting preference: %s/%s=%s", prefsNodeName, key, value));
 		final IEclipsePreferences prefs = InstanceScope.INSTANCE.getNode(prefsNodeName);
 		prefs.put(key, value);
+	}
+
+	@Override
+	public void visitIndentStyle(final ConfigProperty<IndentStyleOption> property) {
+		final Boolean spacesForTabs = property.getValue().equals(IndentStyleOption.SPACE);
+		setPreference("org.eclipse.ui.editors", "spacesForTabs", spacesForTabs.toString());
+	}
+
+	@Override
+	public void visitIndentSize(final ConfigProperty<Integer> property) {
+		setPreference("org.eclipse.ui.editors", "tabWidth", property.getValue().toString());
+	}
+
+	@Override
+	public void visitTabWidth(final ConfigProperty<Integer> property) {
+		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.tabulation.size", property.getValue().toString());
+	}
+
+	@Override
+	public void visitEndOfLine(final ConfigProperty<EndOfLineOption> property) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void visitCharset(final ConfigProperty<String> property) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void visitTrimTrailingWhitespace(final ConfigProperty<Boolean> property) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void visitInsertFinalNewLine(final ConfigProperty<Boolean> property) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

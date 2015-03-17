@@ -59,13 +59,8 @@ public class EditorConfigService {
 	}
 
 	private static ConfigProperty createConfigProperty(final OutPair outPair) {
-		final ConfigPropertyType configType;
-		try {
-			configType = ConfigPropertyType.valueOf(outPair.getKey().toUpperCase());
-		} catch (final IllegalArgumentException e) {
-			return null;
-		}
-		return configType.createConfigProperty(outPair.getVal());
+		final ConfigPropertyType configType = ConfigPropertyType.valueOf(outPair.getKey().toUpperCase());
+		return configType == null ? null : configType.createConfigProperty(outPair.getVal());
 	}
 
 }

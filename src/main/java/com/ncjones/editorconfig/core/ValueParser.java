@@ -17,25 +17,25 @@
  */
 package com.ncjones.editorconfig.core;
 
-interface ValueParser {
+interface ValueParser<T> {
 
-	public static ValueParser IDENTITY_VALUE_PARSER = new ValueParser() {
+	public static ValueParser<String> IDENTITY_VALUE_PARSER = new ValueParser<String>() {
 		@Override
-		public Object parse(final String value) {
+		public String parse(final String value) {
 			return value;
 		}
 	};
 
-	public static ValueParser BOOLEAN_VALUE_PARSER = new ValueParser() {
+	public static ValueParser<Boolean> BOOLEAN_VALUE_PARSER = new ValueParser<Boolean>() {
 		@Override
-		public Object parse(final String value) {
+		public Boolean parse(final String value) {
 			return Boolean.valueOf(value.toLowerCase());
 		}
 	};
 
-	public static ValueParser POSITIVE_INT_VALUE_PARSER = new ValueParser() {
+	public static ValueParser<Integer> POSITIVE_INT_VALUE_PARSER = new ValueParser<Integer>() {
 		@Override
-		public Object parse(final String value) {
+		public Integer parse(final String value) {
 			try {
 				final Integer integer = Integer.valueOf(value);
 				return integer <= 0 ? null : integer;
@@ -45,6 +45,6 @@ interface ValueParser {
 		}
 	};
 
-	Object parse(String value);
+	T parse(String value);
 
 }

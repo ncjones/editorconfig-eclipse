@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Nathan Jones
+ * Copyright 2015 Nathan Jones
  *
  * This file is part of "EditorConfig Eclipse".
  *
@@ -17,21 +17,20 @@
  */
 package com.ncjones.editorconfig.core;
 
-class EnumValueParser<T extends Enum<T>> implements ValueParser<T> {
+public interface ConfigPropertyVisitor {
 
-	private final Class<? extends Enum> enumType;
+	void visitIndentStyle(ConfigProperty<IndentStyleOption> property);
 
-	public EnumValueParser(final Class<? extends T> enumType) {
-		this.enumType = enumType;
-	}
+	void visitIndentSize(ConfigProperty<Integer> property);
 
-	@Override
-	public T parse(final String value) {
-		try {
-			return (T) Enum.valueOf(enumType, value.toUpperCase());
-		} catch (final IllegalArgumentException e) {
-			return null;
-		}
-	}
+	void visitTabWidth(ConfigProperty<Integer> property);
+
+	void visitEndOfLine(ConfigProperty<EndOfLineOption> property);
+
+	void visitCharset(ConfigProperty<String> property);
+
+	void visitTrimTrailingWhitespace(ConfigProperty<Boolean> property);
+
+	void visitInsertFinalNewLine(ConfigProperty<Boolean> property);
 
 }

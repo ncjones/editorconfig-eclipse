@@ -17,22 +17,22 @@
  */
 package com.ncjones.editorconfig.core;
 
-public class ConfigProperty {
+public class ConfigProperty<T> {
 
-	private final ConfigPropertyType type;
+	private final ConfigPropertyType<T> type;
 
-	private final Object value;
+	private final T value;
 
-	public ConfigProperty(final ConfigPropertyType type, final Object value) {
+	public ConfigProperty(final ConfigPropertyType<T> type, final T value) {
 		this.type = type;
 		this.value = value;
 	}
 
-	public ConfigPropertyType getType() {
+	public ConfigPropertyType<T> getType() {
 		return type;
 	}
 
-	public Object getValue() {
+	public T getValue() {
 		return value;
 	}
 
@@ -45,4 +45,7 @@ public class ConfigProperty {
 		return type.getDisplayValue(this);
 	}
 
+	public void accept(final ConfigPropertyVisitor visitor) {
+		type.accept(visitor, this);
+	}
 }

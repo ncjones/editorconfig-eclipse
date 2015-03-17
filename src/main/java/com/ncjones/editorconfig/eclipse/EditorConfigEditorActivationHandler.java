@@ -74,26 +74,23 @@ public class EditorConfigEditorActivationHandler implements EditorActivationHand
 
 	@Override
 	public void visitEndOfLine(final ConfigProperty<EndOfLineOption> property) {
-		// TODO Auto-generated method stub
-
+		setPreference("org.eclipse.core.runtime", "line.separator", property.getValue().getEndOfLineString());
 	}
 
 	@Override
 	public void visitCharset(final ConfigProperty<String> property) {
-		// TODO Auto-generated method stub
-
+		setPreference("org.eclipse.core.resources", "encoding", property.getValue().toUpperCase());
 	}
 
 	@Override
 	public void visitTrimTrailingWhitespace(final ConfigProperty<Boolean> property) {
-		// TODO Auto-generated method stub
-
+		setPreference("org.eclipse.jdt.ui", "sp_cleanup.remove_trailing_whitespaces", property.getValue().toString());
 	}
 
 	@Override
 	public void visitInsertFinalNewLine(final ConfigProperty<Boolean> property) {
-		// TODO Auto-generated method stub
-
+		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.insert_new_line_at_end_of_file_if_missing",
+				property.getValue().toString());
 	}
 
 }

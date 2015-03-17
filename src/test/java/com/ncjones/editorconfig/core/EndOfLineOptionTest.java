@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Nathan Jones
+ * Copyright 2015 Nathan Jones
  *
  * This file is part of "EditorConfig Eclipse".
  *
@@ -17,30 +17,26 @@
  */
 package com.ncjones.editorconfig.core;
 
-public enum EndOfLineOption implements Displayable {
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
-	LF("Line Feed", "\n"),
+import org.junit.Test;
 
-	CR("Carriage Return", "\r"),
+public class EndOfLineOptionTest {
 
-	CRLF("Carriage Return + Line Feed", "\r\n");
-
-	private final String displayValue;
-
-	private String eolString;
-
-	private EndOfLineOption(final String displayValue, final String eolString) {
-		this.displayValue = displayValue;
-		this.eolString = eolString;
+	@Test
+	public void testCr() {
+		assertThat(EndOfLineOption.CR.getEndOfLineString(), is("\r"));
 	}
 
-	@Override
-	public String getDisplayValue() {
-		return displayValue;
+	@Test
+	public void testLf() {
+		assertThat(EndOfLineOption.LF.getEndOfLineString(), is("\n"));
 	}
 
-	public String getEndOfLineString() {
-		return eolString;
+	@Test
+	public void testCrLf() {
+		assertThat(EndOfLineOption.CRLF.getEndOfLineString(), is("\r\n"));
 	}
 
 }

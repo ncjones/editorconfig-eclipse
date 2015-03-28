@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+	id="editorconfig-eclipse-feature"
+	label="EditorConfig Eclipse"
+	version="0.1.0.qualifier"
+	provider-name="Nathan Jones">
+
+	<description>
+EditorConfig support for Eclipse editors.
+
+Visit http://editorconfig.org/ for more info.
+	</description>
+
+	<copyright>
+		Copyright Nathan Jones 2015
+	</copyright>
+
+	<license url="https://www.apache.org/licenses/LICENSE-2.0.txt">
+		Apache License, Version 2.0
+	</license>
+
+	<plugin id="editorconfig-eclipse"
+		version="0.1.0"
+		unpack="false"/>
+
+</feature>
+

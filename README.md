@@ -27,12 +27,7 @@ git submodule update
 Installing
 ----------
 
-To install the built plugin into Eclipse, copy it to your Eclipse dropins dir
-and restart Eclipse:
-
-```sh
-cp editorconfig-eclipse-plugin/target/*.jar $ECLIPSE_HOME/dropins/
-```
+Install via the local update site: `editorconfig-eclipse-p2/target/repository`.
 
 
 License

@@ -31,7 +31,7 @@ To install the built plugin into Eclipse, copy it to your Eclipse dropins dir
 and restart Eclipse:
 
 ```sh
-cp target/*.jar $ECLIPSE_HOME/dropins/
+cp editorconfig-eclipse-plugin/target/*.jar $ECLIPSE_HOME/dropins/
 ```
 
 

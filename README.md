@@ -4,6 +4,14 @@ EditorConfig Eclipse
 [EditorConfig](https://editorconfig.org/) plugin for the Eclipse IDE.
 
 
+Installation
+------------
+
+Install using Eclipse update site:
+
+    https://editorconfig-eclipse.github.io/repository
+
+
 Building
 --------
 
@@ -24,8 +32,8 @@ git submodule update
 ```
 
 
-Installing
-----------
+Installing Locally
+------------------
 
 Install via the local update site: `editorconfig-eclipse-p2/target/repository`.
 

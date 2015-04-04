@@ -20,7 +20,7 @@ Visit http://editorconfig.org/ for more info.
 	</license>
 
 	<plugin id="editorconfig-eclipse"
-		version="0.1.0"
+		version="0.2.0"
 		unpack="false"/>
 
 </feature>

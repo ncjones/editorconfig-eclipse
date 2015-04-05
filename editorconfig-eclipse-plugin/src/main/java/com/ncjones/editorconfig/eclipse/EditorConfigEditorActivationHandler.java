@@ -60,11 +60,17 @@ public class EditorConfigEditorActivationHandler implements EditorActivationHand
 	public void visitIndentStyle(final ConfigProperty<IndentStyleOption> property) {
 		final Boolean spacesForTabs = property.getValue().equals(IndentStyleOption.SPACE);
 		setPreference("org.eclipse.ui.editors", "spacesForTabs", spacesForTabs.toString());
+		setPreference("org.eclipse.wst.xml.core", "indentationChar", spacesForTabs ? "space" : "tab");
+		setPreference("org.eclipse.ant.ui", "formatter_tab_char", Boolean.toString(!spacesForTabs));
+
 	}
 
 	@Override
 	public void visitIndentSize(final ConfigProperty<Integer> property) {
-		setPreference("org.eclipse.ui.editors", "tabWidth", property.getValue().toString());
+		final String indentSizeString = property.getValue().toString();
+		setPreference("org.eclipse.ui.editors", "tabWidth", indentSizeString);
+		setPreference("org.eclipse.wst.xml.core", "indentationSize", indentSizeString);
+		setPreference("org.eclipse.ant.ui", "formatter_tab_size", indentSizeString);
 	}
 
 	@Override

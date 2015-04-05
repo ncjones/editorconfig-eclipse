@@ -12,6 +12,26 @@ Install using Eclipse update site:
     https://editorconfig-eclipse.github.io/repository
 
 
+Feature Support
+---------------
+
+| Feature                    | Support | Notes                                       |
+|----------------------------|---------|---------------------------------------------|
+| `indent_style`             | Yes     | tested with Java, XML, Ant and text editors |
+| `indent_size`              | Yes     | tested with Java, XML, Ant and text editors |
+| `tab_width`                | No      |                                             |
+| `end_of_line`              | Yes     | untested                                    |
+| `charset`                  | Yes     | untested                                    |
+| `trim_trailing_whitespace` | No      |                                             |
+| `insert_final_newline`     | No      |                                             |
+
+
+Compatibility
+-------------
+
+Eclipse Luna is supported.
+
+
 Building
 --------
 

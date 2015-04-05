@@ -9,3 +9,4 @@ tab_width = 3
 
 [*.{xml,java}]
 indent_style = tab
+indent_size = 3

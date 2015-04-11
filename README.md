@@ -52,6 +52,17 @@ git submodule update
 ```
 
 
+Testing
+-------
+
+Functional tests, implemented with JUnit and SwtBot, are located in the
+`editorconfig-eclipse-functional-test` directory. To run the tests:
+
+```sh
+mvn -f editorconfig-eclipse-functional-test/pom.xml integration-test
+```
+
+
 Installing Locally
 ------------------
 

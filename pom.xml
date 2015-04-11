@@ -23,6 +23,11 @@
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/releases/luna</url>
 		</repository>
+		<repository>
+			<id>swtbot</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/technology/swtbot/releases/2.2.1</url>
+		</repository>
 	</repositories>
 
 	<build>

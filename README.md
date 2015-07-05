@@ -29,7 +29,7 @@ Feature Support
 Compatibility
 -------------
 
-Eclipse Luna is supported.
+Eclipse Mars and Luna are supported.
 
 
 Building

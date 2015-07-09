@@ -20,7 +20,7 @@ Feature Support
 | `indent_style`             | Yes     | tested with Java, XML, Ant and text editors |
 | `indent_size`              | Yes     | tested with Java, XML, Ant and text editors |
 | `tab_width`                | No      |                                             |
-| `end_of_line`              | Yes     | untested                                    |
+| `end_of_line`              | No      | applies to files created after similar file opened |
 | `charset`                  | Yes     | untested                                    |
 | `trim_trailing_whitespace` | No      |                                             |
 | `insert_final_newline`     | No      |                                             |

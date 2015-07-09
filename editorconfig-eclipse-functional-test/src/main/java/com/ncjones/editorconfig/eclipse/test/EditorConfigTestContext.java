@@ -82,13 +82,17 @@ public class EditorConfigTestContext {
 	}
 
 	public String fileContents(final String fileName) {
+		return new String(fileBytes(fileName));
+	}
+
+	public byte[] fileBytes(final String fileName) {
 		byte[] bytes;
 		try {
 			bytes = Files.readAllBytes(filePath(fileName));
 		} catch (final IOException e) {
 			throw new RuntimeException(e);
 		}
-		return new String(bytes);
+		return bytes;
 	}
 
 	private static String workspaceDir() {

@@ -79,4 +79,37 @@ public class EditorConfigTest {
 		assertThat(context.fileContents(fileName), equalTo("\t"));
 	}
 
+	@Test
+	public void testEndOfLineCr() {
+		context.editorConfig(
+			"root = true",
+			"[*]",
+			"end_of_line = cr"
+		);
+		context.editFile(fileName, "a\nb");
+		assertThat(context.fileBytes(fileName), equalTo(new byte[] { 'a', '\r', 'b' }));
+	}
+
+	@Test
+	public void testEndOfLineLf() {
+		context.editorConfig(
+			"root = true",
+			"[*]",
+			"end_of_line = lf"
+		);
+		context.editFile(fileName, "a\nb");
+		assertThat(context.fileBytes(fileName), equalTo(new byte[] { 'a', '\n', 'b' }));
+	}
+
+	@Test
+	public void testEndOfLineCrLf() {
+		context.editorConfig(
+			"root = true",
+			"[*]",
+			"end_of_line = crlf"
+		);
+		context.editFile(fileName, "a\nb");
+		assertThat(context.fileBytes(fileName), equalTo(new byte[] { 'a', '\r', '\n', 'b' }));
+	}
+
 }

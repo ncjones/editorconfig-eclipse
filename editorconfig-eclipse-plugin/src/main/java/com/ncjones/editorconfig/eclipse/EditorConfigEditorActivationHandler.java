@@ -46,7 +46,7 @@ public class EditorConfigEditorActivationHandler implements EditorActivationHand
 	}
 
 	private EditorFileConfig getEditorFileConfig(final IFile file) {
-		final String path = file.getLocation().toOSString();
+		final String path = file.getLocation().toString();
 		return editorConfigService.getEditorConfig(path);
 	}
 

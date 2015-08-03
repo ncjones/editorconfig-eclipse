@@ -38,10 +38,12 @@ public class EditorConfigEditorActivationHandler implements EditorActivationHand
 
 	@Override
 	public void editorActivated(final IFile editorFile) {
-		final EditorFileConfig fileEditorConfig = getEditorFileConfig(editorFile);
-		System.out.println("Editor activated: " + fileEditorConfig);
-		for (final ConfigProperty<?> configProperty : fileEditorConfig.getConfigProperties()) {
-			configProperty.accept(this);
+		if (editorFile != null) {
+			final EditorFileConfig fileEditorConfig = getEditorFileConfig(editorFile);
+			System.out.println("Editor activated: " + fileEditorConfig);
+			for (final ConfigProperty<?> configProperty : fileEditorConfig.getConfigProperties()) {
+				configProperty.accept(this);
+			}
 		}
 	}
 

@@ -2,7 +2,7 @@
 <feature
 	id="editorconfig-eclipse-feature"
 	label="EditorConfig Eclipse"
-	version="0.2.1.qualifier"
+	version="0.2.2.qualifier"
 	provider-name="Nathan Jones">
 
 	<description>
@@ -20,7 +20,7 @@ Visit http://editorconfig.org/ for more info.
 	</license>
 
 	<plugin id="editorconfig-eclipse"
-		version="0.2.1"
+		version="0.2.2"
 		unpack="false"/>
 
 </feature>

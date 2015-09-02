@@ -15,4 +15,17 @@
 			</enabledWhen>
 		</page>
 	</extension>
+	
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            id="com.ncjones.editorconfig.eclipse.EditorConfigEditor"
+            name="EditorConfig Editor"
+            class="org.eclipse.ui.editors.text.TextEditor"
+            default="true"
+            extensions="editorconfig"
+            icon="icons/favicon_top_right_corner_file.png">
+      </editor>
+   </extension>
+	
 </plugin>

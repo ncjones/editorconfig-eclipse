@@ -1,6 +1,20 @@
 0.3.0
 -----
 
+ * Text editor and icon associated with .editorconfig file.
+
+
+0.2.2
+-----
+
+ * Fix: avoid null pointer exception when editor activated.
+
+
+0.2.1
+-----
+
+ * Fix: support Windows; don't use OS-native file separator.
+
 
 0.2.0
 -----

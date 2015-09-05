@@ -7,7 +7,7 @@ EditorConfig Eclipse
 Installation
 ------------
 
-Install using Eclipse update site:
+Install from [Ecplipse Marketplace][marketplace] or using Eclipse update site:
 
     https://editorconfig-eclipse.github.io/repository
 
@@ -74,3 +74,5 @@ License
 
 Licensed under the Apache License, Version 2.0.
 
+
+[marketplace]: https://marketplace.eclipse.org/node/2506426

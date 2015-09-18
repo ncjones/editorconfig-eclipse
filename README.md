@@ -7,7 +7,7 @@ EditorConfig Eclipse
 Installation
 ------------
 
-Install from [Ecplipse Marketplace][marketplace] or using Eclipse update site:
+Install from [Eclipse Marketplace][marketplace] or using Eclipse update site:
 
     https://editorconfig-eclipse.github.io/repository
 

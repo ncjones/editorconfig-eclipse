@@ -40,7 +40,7 @@ Building requires Java 1.6 and Maven 3.x.
 To build, run:
 
 ```sh
-mvn install
+mvn clean install
 ```
 
 Note that the build depends on the editorconfig core source via a Git

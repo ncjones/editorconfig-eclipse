@@ -18,10 +18,14 @@ No additional configuration is required other than creating .editorconfig
 files. The plugin applies the editorconfig settings for a file when opened in a 
 supported editor (currently Text, Java, XML and Ant editors). 
 
-Whenever an editor is opened or gains focus, the .editorconfig settings are
-obtained for that editor's file and applied to the editor. How the
-editorconfig is obtained for any file is described in the [EditorConfig
-docs][EditorConfig]:
+
+How It Works
+------------
+
+Whenever an Eclipse editor is opened or gains focus, the .editorconfig settings
+are obtained for that editor's file and applied globally to all supported
+editor types. How the editorconfig is obtained for any file is described in the
+[EditorConfig docs][EditorConfig]:
 
     When opening a file, EditorConfig plugins look for a file named
     .editorconfig in the directory of the opened file and in every parent

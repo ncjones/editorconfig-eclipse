@@ -1,7 +1,7 @@
 EditorConfig Eclipse
 ====================
 
-[EditorConfig](https://editorconfig.org/) plugin for the Eclipse IDE.
+[EditorConfig] plugin for the Eclipse IDE.
 
 
 Installation
@@ -10,6 +10,23 @@ Installation
 Install from [Eclipse Marketplace][marketplace] or using Eclipse update site:
 
     https://editorconfig-eclipse.github.io/repository
+
+Usage
+-----
+
+No additional configuration is required other than creating .editorconfig
+files. The plugin applies the editorconfig settings for a file when opened in a 
+supported editor (currently Text, Java, XML and Ant editors). 
+
+Whenever an editor is opened or gains focus, the .editorconfig settings are
+obtained for that editor's file and applied to the editor. How the
+editorconfig is obtained for any file is described in the [EditorConfig
+docs][EditorConfig]:
+
+    When opening a file, EditorConfig plugins look for a file named
+    .editorconfig in the directory of the opened file and in every parent
+    directory. A search for .editorconfig files will stop if the root filepath
+    is reached or an EditorConfig file with root=true is found.
 
 
 Feature Support
@@ -76,3 +93,4 @@ Licensed under the Apache License, Version 2.0.
 
 
 [marketplace]: https://marketplace.eclipse.org/node/2506426
+[EditorConfig]: http://editorconfig.org/

@@ -3,15 +3,17 @@ EditorConfig Eclipse
 
 [EditorConfig] plugin for the Eclipse IDE.
 
-[![Build Status](https://travis-ci.org/ncjones/editorconfig-eclipse.svg?branch=master)](https://travis-ci.org/ncjones/editorconfig-eclipse)
+[![Build Status][build-status-img]][build-status-link]
 
 
 Installation
 ------------
 
-Install from [Eclipse Marketplace][marketplace] or using Eclipse update site:
+Install from [Eclipse Marketplace][marketplace] by dragging the following
+install link to a running Eclipse workspace:
 
-    https://editorconfig-eclipse.github.io/repository
+[![Install][install-img]][install-link]
+
 
 Usage
 -----
@@ -98,5 +100,9 @@ License
 Licensed under the Apache License, Version 2.0.
 
 
+[build-status-img]: https://travis-ci.org/ncjones/editorconfig-eclipse.svg?branch=master
+[build-status-link]: https://travis-ci.org/ncjones/editorconfig-eclipse
+[install-img]: https://marketplace.eclipse.org/sites/all/themes/solstice/public/images/marketplace/btn-install.png
+[install-link]: http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=2506426
 [marketplace]: https://marketplace.eclipse.org/node/2506426
 [EditorConfig]: http://editorconfig.org/

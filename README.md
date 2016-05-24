@@ -1,6 +1,9 @@
 EditorConfig Eclipse
 ====================
 
+[![Build Status](https://secure.travis-ci.org/ncjones/editorconfig-eclipse.png)](http://travis-ci.org/ncjones/editorconfig-eclipse)
+[![Eclipse install](https://marketplace.eclipse.org/sites/all/modules/custom/marketplace/images/installbutton.png)](http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=2506426)
+
 [EditorConfig] plugin for the Eclipse IDE.
 
 

@@ -3,6 +3,8 @@ EditorConfig Eclipse
 
 [EditorConfig] plugin for the Eclipse IDE.
 
+[![Build Status](https://travis-ci.org/ncjones/editorconfig-eclipse.svg?branch=master)](https://travis-ci.org/ncjones/editorconfig-eclipse)
+
 
 Installation
 ------------
@@ -15,8 +17,8 @@ Usage
 -----
 
 No additional configuration is required other than creating .editorconfig
-files. The plugin applies the editorconfig settings for a file when opened in a 
-supported editor (currently Text, Java, XML and Ant editors). 
+files. The plugin applies the editorconfig settings for a file when opened in a
+supported editor (currently Text, Java, XML and Ant editors).
 
 
 How It Works

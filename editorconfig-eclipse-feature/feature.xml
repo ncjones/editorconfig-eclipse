@@ -19,9 +19,13 @@ Visit http://editorconfig.org/ for more info.
 		Apache License, Version 2.0
 	</license>
 
-	<plugin id="editorconfig-eclipse"
+	<plugin id="org.eclipse.editorconfig.core"
 		version="0.3.0"
 		unpack="false"/>
 
+	<plugin id="org.eclipse.editorconfig.ui"
+		version="0.3.0"
+		unpack="false"/>
+		
 </feature>
 

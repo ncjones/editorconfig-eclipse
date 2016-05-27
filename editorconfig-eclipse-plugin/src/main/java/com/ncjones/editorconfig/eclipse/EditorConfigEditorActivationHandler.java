@@ -98,7 +98,7 @@ public class EditorConfigEditorActivationHandler implements EditorActivationHand
 	@Override
 	public void visitInsertFinalNewLine(final ConfigProperty<Boolean> property) {
 		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.insert_new_line_at_end_of_file_if_missing",
-				property.getValue().toString());
+				property.getValue() ? "insert" : "do not insert");
 	}
 
 }

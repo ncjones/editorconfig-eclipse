@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-SymbolicName: org.eclipse.editorconfig.core;singleton:=true
+Bundle-Version: 0.3.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.resources,
+ org.eclipse.core.runtime
+Export-Package: org.eclipse.editorconfig.core,
+ org.editorconfig.core
+Bundle-Activator: org.eclipse.editorconfig.internal.core.EditorConfigCorePlugin
+Bundle-ActivationPolicy: lazy

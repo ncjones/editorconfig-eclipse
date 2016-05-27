@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            id="org.eclipse.editorconfig.ui.EditorConfigEditor"
+            name="EditorConfig Editor"
+            class="org.eclipse.ui.editors.text.TextEditor"
+            default="true"
+            extensions="editorconfig"
+            icon="icons/favicon_top_right_corner_file.png">
+      </editor>
+   </extension>
+   
+   
+   <extension point="org.eclipse.ui.propertyPages">
+		<page
+				class="org.eclipse.editorconfig.internal.ui.EditorConfigPropertyPage"
+				id="org.eclipse.editorconfig.ui.editorConfigPropertyPage"
+				name="Editor Config"
+				nameFilter="*.*">
+			<enabledWhen>
+				<instanceof value="org.eclipse.core.resources.IFile"/>
+			</enabledWhen>
+		</page>
+   </extension>
+	   
+	<extension point="org.eclipse.ui.startup">
+		<startup class="org.eclipse.editorconfig.internal.ui.EditorConfigEclipseStartup"/>
+	</extension>
+		
+</plugin>

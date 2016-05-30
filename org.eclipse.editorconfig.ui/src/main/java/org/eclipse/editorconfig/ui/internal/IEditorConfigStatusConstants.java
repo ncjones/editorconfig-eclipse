@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Nathan Jones
+ * Copyright 2014-2016 Angelo Zerr
  *
  * This file is part of "EditorConfig Eclipse".
  *
@@ -14,11 +14,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ *  Contributors:
+ *  	Angelo Zerr <angelo.zerr@gmail.com> - initial .editorconfig editor  
  */
-package org.eclipse.editorconfig.internal.ui;
+package org.eclipse.editorconfig.ui.internal;
 
-import org.eclipse.core.resources.IFile;
+/**
+ * Defines status codes relevant to the EditorConfig UI plug-in. When a Core
+ * exception is thrown, it contain a status object describing the cause of the
+ * exception. The status objects originating from the EditorConfig UI plug-in
+ * use the codes defined in this interface.
+ */
+public interface IEditorConfigStatusConstants {
 
-public interface EditorActivationHandler {
-	void editorActivated(IFile file);
+	public static final int INTERNAL_ERROR = 10001;
+
 }

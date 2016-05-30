@@ -6,18 +6,75 @@
          point="org.eclipse.ui.editors">
       <editor
             id="org.eclipse.editorconfig.ui.EditorConfigEditor"
-            name="EditorConfig Editor"
-            class="org.eclipse.ui.editors.text.TextEditor"
+            name="%EditorConfigEditor.name"
+            class="org.eclipse.editorconfig.ui.internal.editor.EditorConfigEditor"
             default="true"
-            extensions="editorconfig"
-            icon="icons/favicon_top_right_corner_file.png">
+            icon="icons/favicon_top_right_corner_file.png"
+            symbolicFontName="org.eclipse.editorconfig.ui.editors.textfont">
+            <contentTypeBinding contentTypeId="org.eclipse.editorconfig.core.editorconfigsource" />
       </editor>
    </extension>
    
-   
+   <extension
+         id="EditorConfigDocumentSetupParticipant"
+         name="%editorConfigDocumentSetupParticipant"
+         point="org.eclipse.core.filebuffers.documentSetup">
+      <participant
+            contentTypeId="org.eclipse.editorconfig.core.editorconfigsource"
+            class="org.eclipse.editorconfig.ui.internal.text.EditorConfigDocumentSetupParticipant">
+      </participant>
+   </extension>
+  
+   <extension
+         point="org.eclipse.ui.themes">
+        <themeElementCategory label="%editorConfigPresentation.label" id="org.eclipse.editorconfig.ui.presentation"/>
+      <fontDefinition
+            label="%editorConfigEditorFontDefinition.label"
+            defaultsTo="org.eclipse.jface.textfont"
+            categoryId="org.eclipse.editorconfig.ui.presentation"
+            id="org.eclipse.editorconfig.ui.editors.textfont">
+         <description>
+            %editorConfigEditorFontDefinition.description
+         </description>
+      </fontDefinition>
+   </extension>
+       
+   <!-- dark theme defaults -->
+   <extension
+      point="org.eclipse.e4.ui.css.swt.theme">
+      <stylesheet uri="css/dark/preferencestyle.css"> 
+         <themeid refid="org.eclipse.e4.ui.css.theme.e4_dark"></themeid>
+      </stylesheet>
+   </extension>
+       
+   <extension point="org.eclipse.core.runtime.preferences">
+        <initializer class="org.eclipse.editorconfig.ui.internal.preferences.EditorConfigUIPreferenceInitializer"/>
+   </extension>
+      
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            name="%editorConfig.preferences.main"
+            class="org.eclipse.editorconfig.ui.internal.preferences.MainPreferencePage"
+            id="org.eclipse.editorconfig.ui.preferences.MainPreferencePage">
+      </page>
+      <page
+            name="%editorConfig.preferences.editor"
+            category="org.eclipse.editorconfig.ui.preferences.MainPreferencePage"
+            class="org.eclipse.editorconfig.ui.internal.preferences.EditorPreferencePage"
+            id="org.eclipse.editorconfig.ui.preferences.EditorPreferencePage">
+      </page>      
+      <page
+            name="%editorConfig.preferences.syntaxcoloring"
+            category="org.eclipse.editorconfig.ui.preferences.EditorPreferencePage"
+            class="org.eclipse.editorconfig.ui.internal.preferences.SyntaxColoringPreferencePage"
+            id="org.eclipse.editorconfig.ui.preferences.SyntaxColoringPreferencePage">
+      </page>
+   </extension>
+            
    <extension point="org.eclipse.ui.propertyPages">
 		<page
-				class="org.eclipse.editorconfig.internal.ui.EditorConfigPropertyPage"
+				class="org.eclipse.editorconfig.ui.internal.preferences.EditorConfigPropertyPage"
 				id="org.eclipse.editorconfig.ui.editorConfigPropertyPage"
 				name="Editor Config"
 				nameFilter="*.*">
@@ -28,7 +85,7 @@
    </extension>
 	   
 	<extension point="org.eclipse.ui.startup">
-		<startup class="org.eclipse.editorconfig.internal.ui.EditorConfigEclipseStartup"/>
+		<startup class="org.eclipse.editorconfig.ui.internal.EditorConfigEclipseStartup"/>
 	</extension>
 		
 </plugin>

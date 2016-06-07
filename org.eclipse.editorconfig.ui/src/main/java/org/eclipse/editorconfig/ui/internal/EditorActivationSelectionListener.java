@@ -38,7 +38,7 @@ public class EditorActivationSelectionListener implements ISelectionListener {
 		if (part != currentEditorPart && part instanceof IEditorPart) {
 			currentEditorPart = (IEditorPart) part;
 			final IFile file = (IFile) currentEditorPart.getEditorInput().getAdapter(IFile.class);
-			editorActivationListener.editorActivated(file);
+			editorActivationListener.editorActivated(file, currentEditorPart.getEditorSite().getId());
 		}
 	}
 }

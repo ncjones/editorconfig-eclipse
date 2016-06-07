@@ -23,6 +23,10 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.editorconfig.core.internal.contributions.PreferencesUpdater;
+import org.eclipse.editorconfig.core.internal.contributions.PreferencesUpdatersContributionManager;
 import org.editorconfig.core.EditorConfig.OutPair;
 import org.editorconfig.core.EditorConfigException;
 
@@ -41,10 +45,17 @@ public class EditorConfigService {
 		this.editorConfig = editorConfig;
 	}
 
-	public EditorFileConfig getEditorConfig(final String path) {
+	public EditorFileConfig getEditorConfig(final IFile editorFile, String editorId) {
+		PreferencesUpdater updater = null;
+		if (editorId != null) {
+			updater = PreferencesUpdatersContributionManager.getInstance().getUpdater(editorId);
+			if (updater == null) {
+				return null;
+			}
+		}
 		final List<OutPair> properties;
 		try {
-			properties = editorConfig.getProperties(path);
+			properties = editorConfig.getProperties(editorFile.getLocation().toString());
 		} catch (final EditorConfigException e) {
 			throw new RuntimeException(e);
 		}
@@ -55,7 +66,7 @@ public class EditorConfigService {
 				configProperties.add(configProperty);
 			}
 		}
-		return new EditorFileConfig(path, Collections.unmodifiableSet(configProperties));
+		return new EditorFileConfig(editorFile, updater, Collections.unmodifiableSet(configProperties));
 	}
 
 	private static ConfigProperty createConfigProperty(final OutPair outPair) {

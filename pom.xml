@@ -13,6 +13,7 @@
 
 	<modules>
 		<module>org.eclipse.editorconfig.core</module>
+        <module>org.eclipse.editorconfig.core.tests</module>
 		<module>org.eclipse.editorconfig.ui</module>
 		<module>editorconfig-eclipse-feature</module>
 		<module>editorconfig-eclipse-p2</module>

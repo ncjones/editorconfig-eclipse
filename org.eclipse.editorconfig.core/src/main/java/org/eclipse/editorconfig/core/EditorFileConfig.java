@@ -19,22 +19,29 @@ package org.eclipse.editorconfig.core;
 
 import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.editorconfig.core.internal.contributions.PreferencesUpdater;
+
 /**
  * Editor config for a file.
  */
 public class EditorFileConfig {
 
-	private final String path;
-	
+	private final IFile editorFile;
+	private final PreferencesUpdater updater;
 	private final Set<ConfigProperty> configProperties;
 
-	public EditorFileConfig(final String path, final Set<ConfigProperty> configProperties) {
-		this.path = path;
+	public EditorFileConfig(IFile editorFile, PreferencesUpdater updater, Set<ConfigProperty> configProperties) {
+		this.editorFile = editorFile;
+		this.updater = updater;
 		this.configProperties = configProperties;
 	}
 
-	public String getPath() {
-		return path;
+	public void applyConfig() {
+		System.out.println("Editor activated: " + this);
+		for (final ConfigProperty<?> configProperty : this.getConfigProperties()) {
+			updater.applyConfig(editorFile, configProperty);
+		}
 	}
 
 	public Set<ConfigProperty> getConfigProperties() {
@@ -43,7 +50,12 @@ public class EditorFileConfig {
 
 	@Override
 	public String toString() {
-		return "EditorFileConfig [path=" + path + ", configProperties=" + configProperties + "]";
+		return "EditorFileConfig [path=" + editorFile.getLocation().toString() + ", configProperties="
+				+ configProperties + "]";
+	}
+
+	public String getPath() {
+		return editorFile.getLocation().toString();
 	}
 
 }

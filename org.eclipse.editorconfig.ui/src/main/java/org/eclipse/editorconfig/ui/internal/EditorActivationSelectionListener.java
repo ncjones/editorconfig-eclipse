@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.eclipse.editorconfig.internal.ui;
+package org.eclipse.editorconfig.ui.internal;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.viewers.ISelection;

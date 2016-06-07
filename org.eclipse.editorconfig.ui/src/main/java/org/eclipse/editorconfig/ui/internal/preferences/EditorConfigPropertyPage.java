@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Nathan Jones
+ * Copyright 2014-2016 Nathan Jones
  *
  * This file is part of "EditorConfig Eclipse".
  *
@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.eclipse.editorconfig.internal.ui;
+package org.eclipse.editorconfig.ui.internal.preferences;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.editorconfig.core.ConfigProperty;

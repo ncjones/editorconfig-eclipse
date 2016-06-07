@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-	
+
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<!-- declares a content type for .editorconfig files -->
+		<content-type id="editorconfigsource" name="%editorconfigName" 
+			base-type="org.eclipse.core.runtime.text"
+			priority="high"
+			file-extensions="editorconfig" >
+	    </content-type> 
+	</extension>
+		
 </plugin>

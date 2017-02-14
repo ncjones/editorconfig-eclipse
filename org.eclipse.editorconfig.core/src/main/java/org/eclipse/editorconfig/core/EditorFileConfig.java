@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Nathan Jones
+ * Copyright 2017 Nathan Jones, Jackson Bailey
  *
  * This file is part of "EditorConfig Eclipse".
  *
@@ -25,7 +25,7 @@ import java.util.Set;
 public class EditorFileConfig {
 
 	private final String path;
-	
+
 	private final Set<ConfigProperty> configProperties;
 
 	public EditorFileConfig(final String path, final Set<ConfigProperty> configProperties) {
@@ -39,6 +39,15 @@ public class EditorFileConfig {
 
 	public Set<ConfigProperty> getConfigProperties() {
 		return configProperties;
+	}
+
+	public ConfigProperty getConfigProperty(String name) {
+		for (ConfigProperty configProperty: configProperties) {
+			if (name.equals(configProperty.getType().getName())) {
+				return configProperty;
+			}
+		}
+		return null;
 	}
 
 	@Override

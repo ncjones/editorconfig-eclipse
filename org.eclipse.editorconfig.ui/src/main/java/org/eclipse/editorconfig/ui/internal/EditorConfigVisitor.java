@@ -21,10 +21,17 @@ import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.editorconfig.core.ConfigProperty;
 import org.eclipse.editorconfig.core.ConfigPropertyVisitor;
+import org.eclipse.editorconfig.core.EditorFileConfig;
 import org.eclipse.editorconfig.core.EndOfLineOption;
 import org.eclipse.editorconfig.core.IndentStyleOption;
 
 public class EditorConfigVisitor implements ConfigPropertyVisitor {
+
+	private final EditorFileConfig editorFileConfig;
+
+	public EditorConfigVisitor(EditorFileConfig editorFileConfig) {
+		this.editorFileConfig = editorFileConfig;
+	}
 
 	private void setPreference(final String prefsNodeName, final String key, final String value) {
 		System.out.println(String.format("Setting preference: %s/%s=%s", prefsNodeName, key, value));

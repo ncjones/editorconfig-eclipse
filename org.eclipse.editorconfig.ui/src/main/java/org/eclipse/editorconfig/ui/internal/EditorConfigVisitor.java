@@ -39,22 +39,36 @@ public class EditorConfigVisitor implements ConfigPropertyVisitor {
 		prefs.put(key, value);
 	}
 
+	private void clearPreference(final String prefsNodeName, final String key) {
+		System.out.println(String.format("Clearing preference: %s/%s", prefsNodeName, key));
+		final IEclipsePreferences prefs = InstanceScope.INSTANCE.getNode(prefsNodeName);
+		prefs.remove(key);
+	}
+
 	@Override
 	public void visitIndentStyle(final ConfigProperty<IndentStyleOption> property) {
 		final Boolean spacesForTabs = property.getValue().equals(IndentStyleOption.SPACE);
 		setPreference("org.eclipse.ui.editors", "spacesForTabs", spacesForTabs.toString());
 		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.tabulation.char", spacesForTabs ? "space" : "tab");
-		setPreference("org.eclipse.wst.xml.core", "indentationChar", spacesForTabs ? "space" : "tab");
 		setPreference("org.eclipse.ant.ui", "formatter_tab_char", Boolean.toString(!spacesForTabs));
 	}
 
 	@Override
 	public void visitIndentSize(final ConfigProperty<Integer> property) {
 		final String indentSizeString = property.getValue().toString();
+		final Object indentStyle = editorFileConfig.getConfigProperty("INDENT_STYLE").getValue();
+
 		setPreference("org.eclipse.ui.editors", "tabWidth", indentSizeString);
 		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.tabulation.size", indentSizeString);
-		setPreference("org.eclipse.wst.xml.core", "indentationSize", indentSizeString);
 		setPreference("org.eclipse.ant.ui", "formatter_tab_size", indentSizeString);
+
+		if (IndentStyleOption.TAB.equals(indentStyle)) {
+			setPreference("org.eclipse.wst.xml.core", "indentationChar", "tab");
+			clearPreference("org.eclipse.wst.xml.core", "indentationSize");
+		} else if (IndentStyleOption.SPACE.equals(indentStyle)) {
+			setPreference("org.eclipse.wst.xml.core", "indentationChar", "space");
+			setPreference("org.eclipse.wst.xml.core", "indentationSize", indentSizeString);
+		}
 	}
 
 	@Override

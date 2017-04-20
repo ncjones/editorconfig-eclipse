@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Nathan Jones
+ * Copyright 2017 Nathan Jones, Jackson Bailey
  *
  * This file is part of "EditorConfig Eclipse".
  *
@@ -65,7 +65,7 @@ public class EditorConfigTest {
 			"indent_size = 2"
 		);
 		context.editFile(fileName, "\t");
-		assertThat(context.fileContents(fileName), equalTo("  "));
+		assertThat(fileName + " has incorrect content", context.fileContents(fileName), equalTo("  "));
 	}
 
 	@Test
@@ -76,7 +76,7 @@ public class EditorConfigTest {
 			"indent_style = tab"
 		);
 		context.editFile(fileName, "\t");
-		assertThat(context.fileContents(fileName), equalTo("\t"));
+		assertThat(fileName + " has incorrect content", context.fileContents(fileName), equalTo("\t"));
 	}
 
 }

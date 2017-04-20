@@ -18,6 +18,7 @@
 package com.ncjones.editorconfig.eclipse.test;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -65,7 +66,7 @@ public class EditorConfigTestContext {
 	}
 
 	private void createJavaProjectIfNotExists(final String projectName) {
-		final Path projectFilePath = Paths.get(workspaceDir(), projectName, ".project");
+		final Path projectFilePath = workspacePath().resolve(projectName).resolve(".project");
 		if (!Files.isRegularFile(projectFilePath, LinkOption.NOFOLLOW_LINKS)) {
 			newJavaProject(projectName);
 		}
@@ -91,8 +92,12 @@ public class EditorConfigTestContext {
 		return new String(bytes);
 	}
 
-	private static String workspaceDir() {
-		return Platform.getInstanceLocation().getURL().getFile();
+	private static Path workspacePath() {
+		try {
+			return Paths.get(Platform.getInstanceLocation().getURL().toURI());
+		} catch (URISyntaxException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public void newFile(final String fileName) {
@@ -126,7 +131,7 @@ public class EditorConfigTestContext {
 	}
 
 	private Path filePath(final String fileName) {
-		return Paths.get(workspaceDir(), projectName, fileName);
+		return workspacePath().resolve(projectName).resolve(fileName);
 	}
 
 }

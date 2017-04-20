@@ -56,7 +56,12 @@ public class EditorConfigVisitor implements ConfigPropertyVisitor {
 	@Override
 	public void visitIndentSize(final ConfigProperty<Integer> property) {
 		final String indentSizeString = property.getValue().toString();
-		final Object indentStyle = editorFileConfig.getConfigProperty("INDENT_STYLE").getValue();
+
+		final ConfigProperty indentStyleProperty = editorFileConfig.getConfigProperty("INDENT_STYLE");
+		Object indentStyle = null;
+		if (indentStyleProperty != null) {
+			indentStyle = indentStyleProperty.getValue();
+		}
 
 		setPreference("org.eclipse.ui.editors", "tabWidth", indentSizeString);
 		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.tabulation.size", indentSizeString);

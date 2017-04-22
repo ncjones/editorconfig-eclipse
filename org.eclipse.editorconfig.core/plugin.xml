@@ -2,6 +2,10 @@
 <?eclipse version="3.4"?>
 <plugin>
 
+   <extension-point id="preferencesUpdaters" 
+   					name="%preferencesUpdaters.name"
+					schema="schema/preferencesUpdaters.exsd" />
+					
 	<extension point="org.eclipse.core.contenttype.contentTypes">
 		<!-- declares a content type for .editorconfig files -->
 		<content-type id="editorconfigsource" name="%editorconfigName" 
@@ -11,4 +15,57 @@
 	    </content-type> 
 	</extension>
 		
+	<extension point="org.eclipse.editorconfig.core.preferencesUpdaters">
+        
+        <!-- Commons Editor -->
+        <preferencesUpdater
+            editorIds="*" >
+            <property from="indent_style" to="spacesForTabs" preferenceName="org.eclipse.ui.editors" >
+                <value from="space" to="true" /> 
+                <value from="tab" to="false" />
+            </property>
+            <property from="indent_size" to="tabWidth" preferenceName="org.eclipse.ui.editors" />
+            <property from="end_of_line" to="line.separator" preferenceName="org.eclipse.core.runtime" >
+                <value from="lf" to="\n" />
+				<value from="cr" to="\r" />
+                <value from="crlf" to="\r\n" />                                
+            </property>
+           <property from="charset" to="encoding" preferenceName="org.eclipse.core.resources" case="upper" />
+        </preferencesUpdater>
+        
+        <!-- JDT Java Editor -->
+        <preferencesUpdater
+            editorIds="org.eclipse.jdt.ui.CompilationUnitEditor"
+            scope="project" >
+            <property from="indent_style" to="org.eclipse.jdt.core.formatter.tabulation.char" preferenceName="org.eclipse.jdt.core"  >
+                <value from="space" to="space" />
+                <value from="tab" to="tab" />
+            </property>
+            <property from="indent_size" to="org.eclipse.jdt.core.formatter.tabulation.size" preferenceName="org.eclipse.jdt.core" />
+            <property from="trim_trailing_whitespace" to="sp_cleanup.remove_trailing_whitespaces" preferenceName="org.eclipse.jdt.ui" />
+            <property from="insert_final_newline" to="org.eclipse.jdt.core.formatter.insert_new_line_at_end_of_file_if_missing" preferenceName="org.eclipse.jdt.core" />            
+        </preferencesUpdater>
+
+        <!-- Ant Editor -->
+        <preferencesUpdater
+            editorIds="org.eclipse.ant.ui.internal.editor.AntEditor" >
+            <property from="indent_style" to="formatter_tab_char" type="boolean" preferenceName="org.eclipse.ant.ui" >
+                <value from="space" to="false" /> 
+                <value from="tab" to="true" />
+            </property>
+            <property from="indent_size" to="formatter_tab_size" preferenceName="org.eclipse.ant.ui" />
+        </preferencesUpdater>
+        
+		<!-- WTP XML Editor -->
+        <preferencesUpdater
+            editorIds="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" >
+            <property from="indent_style" to="indentationChar" preferenceName="org.eclipse.wst.xml.core" >
+                <value from="space" to="space" /> 
+                <value from="tab" to="tab" />
+            </property>
+            <property from="indent_size" to="indentationSize" preferenceName="org.eclipse.wst.xml.core" />
+        </preferencesUpdater>
+                        
+    </extension>
+    		
 </plugin>

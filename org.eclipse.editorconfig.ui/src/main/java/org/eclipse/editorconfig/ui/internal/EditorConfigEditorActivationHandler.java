@@ -18,16 +18,10 @@
 package org.eclipse.editorconfig.ui.internal;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.preferences.IEclipsePreferences;
-import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.editorconfig.core.ConfigProperty;
-import org.eclipse.editorconfig.core.ConfigPropertyVisitor;
 import org.eclipse.editorconfig.core.EditorConfigService;
 import org.eclipse.editorconfig.core.EditorFileConfig;
-import org.eclipse.editorconfig.core.EndOfLineOption;
-import org.eclipse.editorconfig.core.IndentStyleOption;
 
-public class EditorConfigEditorActivationHandler implements EditorActivationHandler, ConfigPropertyVisitor {
+public class EditorConfigEditorActivationHandler implements EditorActivationHandler {
 
 	private final EditorConfigService editorConfigService;
 
@@ -36,68 +30,16 @@ public class EditorConfigEditorActivationHandler implements EditorActivationHand
 	}
 
 	@Override
-	public void editorActivated(final IFile editorFile) {
+	public void editorActivated(final IFile editorFile, String editorId) {
 		if (editorFile != null) {
-			final EditorFileConfig fileEditorConfig = getEditorFileConfig(editorFile);
-			System.out.println("Editor activated: " + fileEditorConfig);
-			for (final ConfigProperty<?> configProperty : fileEditorConfig.getConfigProperties()) {
-				configProperty.accept(this);
-			}
+			final EditorFileConfig fileEditorConfig = getEditorFileConfig(editorFile, editorId);
+			if (fileEditorConfig != null) {
+				fileEditorConfig.applyConfig();
+			}			
 		}
 	}
 
-	private EditorFileConfig getEditorFileConfig(final IFile file) {
-		final String path = file.getLocation().toString();
-		return editorConfigService.getEditorConfig(path);
+	private EditorFileConfig getEditorFileConfig(final IFile file, String editorId) {
+		return editorConfigService.getEditorConfig(file, editorId);
 	}
-
-	private void setPreference(final String prefsNodeName, final String key, final String value) {
-		System.out.println(String.format("Setting preference: %s/%s=%s", prefsNodeName, key, value));
-		final IEclipsePreferences prefs = InstanceScope.INSTANCE.getNode(prefsNodeName);
-		prefs.put(key, value);
-	}
-
-	@Override
-	public void visitIndentStyle(final ConfigProperty<IndentStyleOption> property) {
-		final Boolean spacesForTabs = property.getValue().equals(IndentStyleOption.SPACE);
-		setPreference("org.eclipse.ui.editors", "spacesForTabs", spacesForTabs.toString());
-		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.tabulation.char", spacesForTabs ? "space" : "tab");
-		setPreference("org.eclipse.wst.xml.core", "indentationChar", spacesForTabs ? "space" : "tab");
-		setPreference("org.eclipse.ant.ui", "formatter_tab_char", Boolean.toString(!spacesForTabs));
-	}
-
-	@Override
-	public void visitIndentSize(final ConfigProperty<Integer> property) {
-		final String indentSizeString = property.getValue().toString();
-		setPreference("org.eclipse.ui.editors", "tabWidth", indentSizeString);
-		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.tabulation.size", indentSizeString);
-		setPreference("org.eclipse.wst.xml.core", "indentationSize", indentSizeString);
-		setPreference("org.eclipse.ant.ui", "formatter_tab_size", indentSizeString);
-	}
-
-	@Override
-	public void visitTabWidth(final ConfigProperty<Integer> property) {
-	}
-
-	@Override
-	public void visitEndOfLine(final ConfigProperty<EndOfLineOption> property) {
-		setPreference("org.eclipse.core.runtime", "line.separator", property.getValue().getEndOfLineString());
-	}
-
-	@Override
-	public void visitCharset(final ConfigProperty<String> property) {
-		setPreference("org.eclipse.core.resources", "encoding", property.getValue().toUpperCase());
-	}
-
-	@Override
-	public void visitTrimTrailingWhitespace(final ConfigProperty<Boolean> property) {
-		setPreference("org.eclipse.jdt.ui", "sp_cleanup.remove_trailing_whitespaces", property.getValue().toString());
-	}
-
-	@Override
-	public void visitInsertFinalNewLine(final ConfigProperty<Boolean> property) {
-		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.insert_new_line_at_end_of_file_if_missing",
-				property.getValue().toString());
-	}
-
 }

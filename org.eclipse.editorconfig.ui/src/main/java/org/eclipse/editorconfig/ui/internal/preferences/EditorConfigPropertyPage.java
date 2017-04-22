@@ -17,6 +17,7 @@
  */
 package org.eclipse.editorconfig.ui.internal.preferences;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.editorconfig.core.ConfigProperty;
 import org.eclipse.editorconfig.core.EditorConfigService;
@@ -50,8 +51,8 @@ public class EditorConfigPropertyPage extends PropertyPage {
 	}
 
 	private EditorFileConfig getFileEditorConfig() {
-		final String path = getResource().getWorkspace().getRoot().getFile(getResource().getFullPath()).getLocation().toOSString();
-		return editorConfigService.getEditorConfig(path);
+		final IFile file= getResource().getWorkspace().getRoot().getFile(getResource().getFullPath());
+		return editorConfigService.getEditorConfig(file, null);
 	}
 
 	private IResource getResource() {

@@ -93,7 +93,7 @@ public class EditorConfigServiceParamaterizedTest {
 		final org.editorconfig.core.EditorConfig editorConfigRules = Mockito.mock(org.editorconfig.core.EditorConfig.class);
 		final EditorConfigService editorConfigService = new EditorConfigService(editorConfigRules);
 		when(editorConfigRules.getProperties("test/path")).thenReturn(asList(new OutPair(key, rawValue)));
-		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig("test/path");
+		final EditorFileConfig fileConfig = editorConfigService.getEditorConfig(new FileMock("test/path"), null);
 		assertThat(fileConfig.getConfigProperties(), contains(configProperty(type, parsedValue)));
 	}
 

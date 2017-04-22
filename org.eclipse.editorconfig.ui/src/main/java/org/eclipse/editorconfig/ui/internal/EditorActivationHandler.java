@@ -20,5 +20,5 @@ package org.eclipse.editorconfig.ui.internal;
 import org.eclipse.core.resources.IFile;
 
 public interface EditorActivationHandler {
-	void editorActivated(IFile file);
+	void editorActivated(IFile file, String editorId);
 }

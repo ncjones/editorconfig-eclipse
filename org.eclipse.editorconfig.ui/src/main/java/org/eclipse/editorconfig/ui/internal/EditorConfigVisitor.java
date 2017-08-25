@@ -44,14 +44,16 @@ public class EditorConfigVisitor implements ConfigPropertyVisitor {
 	@Override
 	public void visitIndentSize(final ConfigProperty<Integer> property) {
 		final String indentSizeString = property.getValue().toString();
-		setPreference("org.eclipse.ui.editors", "tabWidth", indentSizeString);
-		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.tabulation.size", indentSizeString);
 		setPreference("org.eclipse.wst.xml.core", "indentationSize", indentSizeString);
-		setPreference("org.eclipse.ant.ui", "formatter_tab_size", indentSizeString);
+		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.indentation.size", indentSizeString);
 	}
 
 	@Override
 	public void visitTabWidth(final ConfigProperty<Integer> property) {
+		final String tabWidth = property.getValue().toString();
+		setPreference("org.eclipse.ui.editors", "tabWidth", tabWidth);
+		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.tabulation.size", tabWidth);
+		setPreference("org.eclipse.ant.ui", "formatter_tab_size", tabWidth);
 	}
 
 	@Override

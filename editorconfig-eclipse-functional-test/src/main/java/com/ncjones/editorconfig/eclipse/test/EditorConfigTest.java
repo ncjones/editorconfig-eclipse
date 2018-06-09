@@ -79,4 +79,16 @@ public class EditorConfigTest {
 		assertThat(context.fileContents(fileName), equalTo("\t"));
 	}
 
+	@Test
+	public void testIndentStyleTabWithSize() throws Exception {
+		context.editorConfig(
+			"root = true",
+			"[*]",
+			"indent_style = tab",
+			"indent_size = 2"
+		);
+		context.editFile(fileName, "\t");
+		assertThat(context.fileContents(fileName), equalTo("\t"));
+	}
+
 }

@@ -20,6 +20,7 @@ package org.eclipse.editorconfig.ui.internal;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.editorconfig.core.ConfigProperty;
+import org.eclipse.editorconfig.core.ConfigPropertyType;
 import org.eclipse.editorconfig.core.ConfigPropertyVisitor;
 import org.eclipse.editorconfig.core.EditorFileConfig;
 import org.eclipse.editorconfig.core.EndOfLineOption;
@@ -51,13 +52,17 @@ public class EditorConfigVisitor implements ConfigPropertyVisitor {
 	@Override
 	public void visitIndentSize(final ConfigProperty<Integer> property) {
 		final String indentSizeString = property.getValue().toString();
-		setPreference("org.eclipse.wst.xml.core", "indentationSize", indentSizeString);
-		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.indentation.size", indentSizeString);
+		// this represents the number of tabs, not their width
+		setPreference("org.eclipse.wst.xml.core", "indentationSize",
+				config.getConfigProperty(ConfigPropertyType.INDENT_STYLE.getName()).getValue().equals(IndentStyleOption.SPACE)
+					? indentSizeString
+					: "1");
 	}
 
 	@Override
 	public void visitTabWidth(final ConfigProperty<Integer> property) {
 		final String tabWidth = property.getValue().toString();
+		// xml editor will follow this
 		setPreference("org.eclipse.ui.editors", "tabWidth", tabWidth);
 		setPreference("org.eclipse.jdt.core", "org.eclipse.jdt.core.formatter.tabulation.size", tabWidth);
 		setPreference("org.eclipse.ant.ui", "formatter_tab_size", tabWidth);

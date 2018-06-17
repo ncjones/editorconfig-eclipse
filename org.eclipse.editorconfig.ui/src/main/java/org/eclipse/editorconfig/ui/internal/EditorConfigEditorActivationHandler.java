@@ -35,8 +35,9 @@ public class EditorConfigEditorActivationHandler implements EditorActivationHand
 		if (editorFile != null) {
 			final EditorFileConfig fileEditorConfig = getEditorFileConfig(editorFile);
 			System.out.println("Editor activated: " + fileEditorConfig);
+			EditorConfigVisitor visitor = new EditorConfigVisitor(fileEditorConfig);
 			for (final ConfigProperty<?> configProperty : fileEditorConfig.getConfigProperties()) {
-				configProperty.accept(new EditorConfigVisitor());
+				configProperty.accept(visitor);
 			}
 		}
 	}
